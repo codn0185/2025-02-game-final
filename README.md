@@ -6,3 +6,6 @@ Dev Instructions:
 - Delete the folders `Animation` `Material` `Prefabs` `Scenes` `Script` `Sound` that is outside the `Development` folder
   
 Then, it should be good to go!
+
+# References
+- [Fantasy skybox](https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353)
