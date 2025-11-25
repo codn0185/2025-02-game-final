@@ -47,12 +47,12 @@ Dev Instructions:
 
 ### 마법 속성
 
-- 불(Fire) - 지속 데미지
-- 물(Water) - 방어력 감소
-- 얼음(Ice) - 이속 감소
-- 번개(Lightning) - 경직, 연쇄
-- 땅(Earth) - 범위 공격(AOE)
-- 바람(Wind) - 넉백
+- 불(Fire) - 폭발(범위공격)
+- 얼음(Ice) - 단일 공격, 이속 감소
+- 전기(Electric) - 연쇄 공격, 경직(잠깐 정지)
+- 땅(Earth) - 단일 공격, 연사력 높음, 넉백
+- 빛(Light) - 즉시 공격, 관통, 지속
+- 어둠(Dark) - 단일 공격, 높은 데미지, 낮은 연사속도, 관통
 
 ### 마법 능력치
 
@@ -216,3 +216,52 @@ Dev Instructions:
 
 - [Powerup Particles](https://assetstore.unity.com/packages/vfx/particles/powerup-particles-16458#content)
 - [Simple Gems and Items Ultimate Animated Customizable Pack](https://assetstore.unity.com/packages/3d/props/simple-gems-and-items-ultimate-animated-customizable-pack-73764)
+
+---
+
+## Sound
+
+- [Pixabay/sound-effect](https://pixabay.com/ko/sound-effects/)
+
+### UI Menu
+
+- BGM
+  - Main Menu
+  - Pause Menu
+  - Game Over Menu
+  - Game Clear Menu
+  - Stage
+    1. Stage 1
+    2. Stage 2
+    3. Stage 3
+    4. Stage 4
+    5. Stage 5
+
+### Monster Sound
+
+- Default
+- Hit
+- Die
+
+### Player Sound
+
+- Move
+- Attack
+- Hit
+- Die
+
+### Magic Sound
+
+- 발동
+- 직격
+
+### Item Sound
+
+- Pick-up
+
+---
+
+## Scene Architecture
+
+- Main Scene
+- Game Scene
