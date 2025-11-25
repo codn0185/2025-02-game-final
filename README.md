@@ -1,52 +1,58 @@
+
+---
 # 2025-02-game-final
 
 Dev Instructions:
+
 - Clone this repository to your workspace
 - Download the initial project from [This link](https://drive.google.com/file/d/14PkNCKgChW-yJzDFg0sN7i96q37w8dEj/view?usp=drive_link) and extract all the content to the folder
 
-# 게임 메커니즘
+---
 
-## 장르 - 로그라이트 (Rouge-lite)
+
+---
+## 게임 메커니즘
+
+### 장르 - 로그라이트 (Rouge-lite)
 
 - 매 플레이마다 초기화
 - 게임 클리어 시 얻는 재화로 능력치 업그레이드 및 스킬 등 해금 가능
 
-## 파티 시스템
+### 파티 시스템
 
 - 마법사 - 메인 캐릭터
 - 전사(탱커) - 플레이어 체력
 - 사제 - 체력 회복
 - 기타 파티원(도적 등)
-    
-    게임 시작 전 선택 가능
-    
 
-## 공격 시스템
+    게임 시작 전 선택 가능
+
+### 공격 시스템
 
 - 플레이어가 바라보는 방향으로 자동 공격
 - 다양한 공격의 스타일을 가진 마법
-    - 땅 - 단일 공격에 높은 데미지
-    - 화염 - 지속 데미지
-    - 번개 - 적 잠시 정지
-    - 물 - 방어력 감소
-    - 얼음 - 적 속도 감소
+  - 땅 - 단일 공격에 높은 데미지
+  - 화염 - 지속 데미지
+  - 번개 - 적 잠시 정지
+  - 물 - 방어력 감소
+  - 얼음 - 적 속도 감소
 - 시작 시 메인 마법 속성 선택
 - 마법 자체 업그레이드와 마법에 추가 능력 추가 구별
 - 마법 능력치 업그레이드 - 공격력, 공격 속도, 공격 범위, 관통 횟수 등 마법 자체의 능력치 업그레이드
 - 보조 스킬 업그레이드 - 적 적중 시 폭발, 적 속도 감소 등 마법 격공과 연계되는 추가 기술
 - 스킬 시스템
-    - 공격과 별개의 스킬 시스템
-    - 쿨타임
-    - 전체 데미지 / 공격 속도 증가 / 적 속도 감속 등
+  - 공격과 별개의 스킬 시스템
+  - 쿨타임
+  - 전체 데미지 / 공격 속도 증가 / 적 속도 감속 등
 
 ### 마법 속성
 
-- 불(Fire) - 지속 데미지
-- 물(Water) - 방어력 감소
-- 얼음(Ice) - 이속 감소
-- 번개(Lightning) - 경직, 연쇄
-- 땅(Earth) - 범위 공격(AOE)
-- 바람(Wind) - 넉백
+- 불(Fire) - 폭발(범위공격)
+- 얼음(Ice) - 단일 공격, 이속 감소
+- 전기(Electric) - 연쇄 공격, 경직(잠깐 정지)
+- 땅(Earth) - 단일 공격, 연사력 높음, 넉백
+- 빛(Light) - 즉시 공격, 관통, 지속
+- 어둠(Dark) - 단일 공격, 높은 데미지, 낮은 연사속도, 관통
 
 ### 마법 능력치
 
@@ -69,24 +75,32 @@ Dev Instructions:
 - 일정 시간 동안 적 속도 감소
 - 일정 시간 동안 적 방어력 감소
 
-# 목표 및 스토리
+
+---
+## 목표 및 스토리
 
 용사 파티를 이끌고 마왕을 처치하러 떠나는 스토리
 
 각 챕터 또는 스테이지의 보스를 쓰러뜨려서 마지막에는 마왕을 처치하는 것이 목표
 
-# 유니티
 
-https://assetstore.unity.com/ko-KR
+---
+## 유니티
 
-https://www.turbosquid.com/ko/
+- [유니티 에셋스토어](https://assetstore.unity.com/ko-KR)
+- [TurboSquid](https://www.turbosquid.com/ko/)
+- [Mixamo](https://www.mixamo.com/)
 
-https://www.mixamo.com/
 
-## UI
+---
+### UI
 
-## 게임 모델링 및 애니메이션
 
+---
+### 게임 모델링 및 애니메이션
+
+
+---
 ### 배경
 
 스테이지 별 다른 컨셉
@@ -99,53 +113,39 @@ https://www.mixamo.com/
 4. 용암 지대
 5. 마왕성
 
-https://assetstore.unity.com/packages/3d/environments/landscapes/terrain-sample-asset-pack-145808
+- [Terrain Sample Asset Pack](https://assetstore.unity.com/packages/3d/environments/landscapes/terrain-sample-asset-pack-145808)
 
-- object
-    
-    https://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-simple-nature-pack-162153
-    
-    https://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-atmospheric-locations-pack-278928
-    
-    https://assetstore.unity.com/packages/3d/environments/free-low-poly-desert-pack-106709
-    
-    https://assetstore.unity.com/packages/3d/environments/fantasy/inferno-world-free-low-poly-3d-models-328402
-    
+- Object
+  - [Low Poly Simple Nature Pack](https://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-simple-nature-pack-162153)
+  - [Low Poly Atmospheric Locations Pack](https://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-atmospheric-locations-pack-278928)
+  - [Free Low Poly Desert Pack](https://assetstore.unity.com/packages/3d/environments/free-low-poly-desert-pack-106709)
+  - [Inferno World Free Low Poly 3D Models](https://assetstore.unity.com/packages/3d/environments/fantasy/inferno-world-free-low-poly-3d-models-328402)
+
 - Sky
-    
-    https://assetstore.unity.com/packages/2d/textures-materials/sky/farland-skies-cloudy-crown-60004
-    
+  - [Farland Skies Cloudy Crown](https://assetstore.unity.com/packages/2d/textures-materials/sky/farland-skies-cloudy-crown-60004)
+
+---
 
 ### 용사 파티
 
-- 마법사
-    - 앞으로 걷기
-    - 공격
-    
-    https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/battle-wizard-poly-art-128097
-    
-    3가지 마법사와 지팡이 모델과 모션
-    
-    https://assetstore.unity.com/packages/3d/props/weapons/3d-items-free-wand-pack-46225
-    
-- 전사
-    - 방어
-    
-    https://assetstore.unity.com/packages/3d/characters/humanoids/rpg-tiny-hero-duo-pbr-polyart-225148
-    
-    https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/rpg-hero-pbr-hp-polyart-121480
-    
-- 사제
-    - 회복
+- 마법사 (공격)
+  - [Battle Wizard Poly Art](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/battle-wizard-poly-art-128097)
+  - [Free Wand Pack](https://assetstore.unity.com/packages/3d/props/weapons/3d-items-free-wand-pack-46225) - 3가지 마법사와 지팡이 모델과 모션
+
+- 전사 (방어)
+  - [RPG Tiny Hero Duo PBR Polyart](https://assetstore.unity.com/packages/3d/characters/humanoids/rpg-tiny-hero-duo-pbr-polyart-225148)
+  - [RPG Hero PBR HP Polyart](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/rpg-hero-pbr-hp-polyart-121480)
+
+- 사제 (회복)
 
 - 무기
-    
-    https://assetstore.unity.com/packages/3d/props/weapons/free-rpg-weapons-199738
-    
-    https://assetstore.unity.com/packages/3d/props/weapons/free-cartoon-weapon-pack-mobile-vr-23956
-    
-    https://assetstore.unity.com/packages/3d/props/weapons/free-low-poly-fantasy-rpg-weapons-248405
-    
+  - [Free RPG Weapons](https://assetstore.unity.com/packages/3d/props/weapons/free-rpg-weapons-199738)
+  - [Free Cartoon Weapon Pack Mobile VR](https://assetstore.unity.com/packages/3d/props/weapons/free-cartoon-weapon-pack-mobile-vr-23956)
+  - [Free Low Poly Fantasy RPG Weapons](https://assetstore.unity.com/packages/3d/props/weapons/free-low-poly-fantasy-rpg-weapons-248405)
+
+- 이동 애니메이션
+
+---
 
 ### 몬스터
 
@@ -173,93 +173,95 @@ https://assetstore.unity.com/packages/3d/environments/landscapes/terrain-sample-
     - 마도사
     - 보스 - 마왕
 
-https://alexkim0415.wixsite.com/dungeonmason
+- [Dungeonmason](https://alexkim0415.wixsite.com/dungeonmason) (유료)
+- [RPG Monster Duo PBR Polyart](https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762) - 슬라임, Turtle Shell
+- [Haon SD Creature Pack](https://assetstore.unity.com/packages/3d/characters/creatures/haon-sd-creature-pack-311173#content) - 상자, 토끼, 유령
+- [Fuga Spiders with Destructible Eggs and Mummy](https://assetstore.unity.com/packages/3d/characters/creatures/fuga-spiders-with-destructible-eggs-and-mummy-151921#content) - 거미 몬스터
+- [Stylized Free Skeleton](https://assetstore.unity.com/packages/3d/characters/creatures/stylized-free-skeleton-298650#reviews) - 스켈레톤
+- [Level 1 Monster Pack](https://assetstore.unity.com/packages/3d/characters/creatures/level-1-monster-pack-77703) - 박쥐, 유령, 토끼, 슬라임
+- [RPG Monster Partners PBR Polyart](https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-partners-pbr-polyart-168251) - 상자 몬스터, Beholder
+- [Dragon the Soul Eater and Dragon Boar](https://assetstore.unity.com/packages/3d/characters/creatures/dragon-the-soul-eater-and-dragon-boar-77121#content) - 드래곤
+- [Mini Legion Lich PBR HP Polyart](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-lich-pbr-hp-polyart-91497) - 리치
+- [Dragon for Boss Monster HP](https://assetstore.unity.com/packages/3d/characters/creatures/dragon-for-boss-monster-hp-79398#content) - 보스 드래곤
+- [Mini Legion Rock Golem PBR HP Polyart](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-rock-golem-pbr-hp-polyart-94707) - 돌 골렘
+- [Mini Legion Grunt PBR HP Polyart](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-grunt-pbr-hp-polyart-98187) - Grunt
+- [Monster Minion Survivor PBR Polyart](https://assetstore.unity.com/packages/3d/characters/creatures/monster-minion-survivor-pbr-polyart-269515) - 미니언
+- [RPG Monster Buddy PBR Polyart](https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-buddy-pbr-polyart-253961) - 버섯, 선인장 몬스터
 
-(유료) 몬스터, 용사 파티 모델링
-
-https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-duo-pbr-polyart-157762
-
-슬라임, Turtle Shell 몬스터
-
-https://assetstore.unity.com/packages/3d/characters/creatures/haon-sd-creature-pack-311173#content
-
-상자(열림/닫힘), 토끼, 유령
-
-https://assetstore.unity.com/packages/3d/characters/creatures/fuga-spiders-with-destructible-eggs-and-mummy-151921#content
-
-거미 몬스터 (알, 유체, 성체)
-
-https://assetstore.unity.com/packages/3d/characters/creatures/stylized-free-skeleton-298650#reviews
-
-스켈레톤
-
-https://assetstore.unity.com/packages/3d/characters/creatures/level-1-monster-pack-77703
-
-박쥐, 유령, 토끼, 슬라임
-
-https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-partners-pbr-polyart-168251
-
-상자 몬스터, Beholder
-
-https://assetstore.unity.com/packages/3d/characters/creatures/dragon-the-soul-eater-and-dragon-boar-77121#content
-
-드래곤
-
-https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-lich-pbr-hp-polyart-91497
-
-리치
-
-https://assetstore.unity.com/packages/3d/characters/creatures/dragon-for-boss-monster-hp-79398#content
-
-보스 드래곤
-
-https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-rock-golem-pbr-hp-polyart-94707
-
-돌 골렘
-
-https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-grunt-pbr-hp-polyart-98187
-
-Grunt
-
-https://assetstore.unity.com/packages/3d/characters/creatures/monster-minion-survivor-pbr-polyart-269515
-
-미니언
-
-https://assetstore.unity.com/packages/3d/characters/creatures/rpg-monster-buddy-pbr-polyart-253961
-
-버섯, 선인장 몬스터
+---
 
 ### 마법
 
 공격 속성 별 무기 (지팡이나 마법서 등)
 
-속성 별 마법 오브젝트 및 이펙트
-
-https://assetstore.unity.com/packages/vfx/particles/legacy-particle-pack-73777
-
-https://assetstore.unity.com/packages/vfx/particles/particle-pack-127325
-
-https://assetstore.unity.com/packages/vfx/particles/polygonal-s-low-poly-particle-pack-118355
-
-https://assetstore.unity.com/packages/vfx/particles/simple-fx-cartoon-particles-67834#content
-
-https://assetstore.unity.com/packages/vfx/particles/spells/magic-effects-free-247933#content
-
-https://assetstore.unity.com/packages/vfx/particles/free-quick-effects-vol-1-304424
-
-https://assetstore.unity.com/packages/vfx/particles/effect-textures-and-prefabs-109031
+- 속성 별 마법 오브젝트 및 이펙트
+  - [Legacy Particle Pack](https://assetstore.unity.com/packages/vfx/particles/legacy-particle-pack-73777)
+  - [Particle Pack](https://assetstore.unity.com/packages/vfx/particles/particle-pack-127325)
+  - [Polygonal's Low Poly Particle Pack](https://assetstore.unity.com/packages/vfx/particles/polygonal-s-low-poly-particle-pack-118355)
+  - [Simple FX Cartoon Particles](https://assetstore.unity.com/packages/vfx/particles/simple-fx-cartoon-particles-67834#content)
+  - [Magic Effects Free](https://assetstore.unity.com/packages/vfx/particles/spells/magic-effects-free-247933#content)
+  - [Free Quick Effects Vol.1](https://assetstore.unity.com/packages/vfx/particles/free-quick-effects-vol-1-304424)
+  - [Effect Textures and Prefabs](https://assetstore.unity.com/packages/vfx/particles/effect-textures-and-prefabs-109031)
 
 - 타격 이펙트
-    
-    https://assetstore.unity.com/packages/vfx/particles/hit-effects-free-284613
-    
-    https://assetstore.unity.com/packages/vfx/particles/hit-impact-effects-free-218385
-    
+
+  - [Hit Effects Free](https://assetstore.unity.com/packages/vfx/particles/hit-effects-free-284613)
+  - [Hit Impact Effects Free](https://assetstore.unity.com/packages/vfx/particles/hit-impact-effects-free-218385)
+
+---
 
 ### 아이템
 
 업그레이드, 무기 등
 
-https://assetstore.unity.com/packages/vfx/particles/powerup-particles-16458#content
+- [Powerup Particles](https://assetstore.unity.com/packages/vfx/particles/powerup-particles-16458#content)
+- [Simple Gems and Items Ultimate Animated Customizable Pack](https://assetstore.unity.com/packages/3d/props/simple-gems-and-items-ultimate-animated-customizable-pack-73764)
 
-https://assetstore.unity.com/packages/3d/props/simple-gems-and-items-ultimate-animated-customizable-pack-73764
+---
+
+## Sound
+
+- [Pixabay/sound-effect](https://pixabay.com/ko/sound-effects/)
+
+### UI Menu
+
+- BGM
+  - Main Menu
+  - Pause Menu
+  - Game Over Menu
+  - Game Clear Menu
+  - Stage
+    1. Stage 1
+    2. Stage 2
+    3. Stage 3
+    4. Stage 4
+    5. Stage 5
+
+### Monster Sound
+
+- Default
+- Hit
+- Die
+
+### Player Sound
+
+- Move
+- Attack
+- Hit
+- Die
+
+### Magic Sound
+
+- 발동
+- 직격
+
+### Item Sound
+
+- Pick-up
+
+---
+
+## Scene Architecture
+
+- Main Scene
+- Game Scene
