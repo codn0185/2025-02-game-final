@@ -7,8 +7,8 @@ public enum ResourceType
 
 public abstract class ResourceItem : ItemBase
 {
-    ResourceType type;
-    int amount;
+    public ResourceType type;
+    public int amount;
 
     public override void Apply()
     {

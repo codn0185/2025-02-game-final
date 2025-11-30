@@ -8,22 +8,11 @@ public enum UpgradeType
 
 public abstract class UpgradeItem : ItemBase
 {
-    UpgradeType type;
+    public UpgradeType type;
 
     public override void Apply()
     {
         // 업그레이드 아이템 효과 적용 로직 구현
-        // switch (type)
-        // {
-        //     case UpgradeType.DamageUpgrade:
-        //         PlayerController.IncreaseDamage(upgradeAmount);
-        //         break;
-        //     case UpgradeType.AttackSpeedUpgrade:
-        //         PlayerController.IncreaseAttackSpeed(upgradeAmount);
-        //         break;
-        //     case UpgradeType.ShieldUpgrade:
-        //         PlayerController.StrengthenShield(upgradeAmount);
-        //         break;
-        // }
+        // PlayerInventory.ApplyUpgrade(type);
     }
 }
