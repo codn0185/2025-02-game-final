@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 1019810122}
   - component: {fileID: 1019810121}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: AttackPoint
   m_TagString: AttackPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
