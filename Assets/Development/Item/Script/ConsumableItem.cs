@@ -1,20 +1,37 @@
 // 소비 아이템 (회복, 일시 강화 등)
-public enum ConsumableType
+public abstract class ConsumableItem : ItemBase
+{
+}
+
+public enum InstantConsumableType
 {
     HealthPotion,
+}
+
+public abstract class InstantConsumableItem : ConsumableItem
+{
+    public InstantConsumableType type;
+
+    public override void Apply()
+    {
+        GameItemManager.Instance.AddInstantConsumable(this);
+    }
+}   
+
+public enum TimedConsumableType
+{
     StrengthBoost,
     AttackSpeedBoost
 }
 
-public abstract class ConsumableItem : ItemBase
+public abstract class TimedConsumableItem : ConsumableItem
 {
-    public ConsumableType type;
-    public bool isInstant; // true면 즉시 적용, false면 duration 동안 적용
-    public float duration; // 지속형 효과일 때 지속 시간(초)
+    public TimedConsumableType type;
+    public float duration;
 
     public override void Apply()
     {
-        // 소비 아이템 효과 적용 로직 구현
-        // PlayerInventory.UseConsumable(type, isInstant, duration);
+        GameItemManager.Instance.AddTimedConsumable(this);
     }
+    public abstract void Revert();
 }
