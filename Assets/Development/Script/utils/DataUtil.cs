@@ -41,6 +41,4 @@ public static class DataUtil
         string jsonData = JsonUtility.ToJson(data, true);
         SaveJsonString(filePath, jsonData);
     }
-
-
 }
