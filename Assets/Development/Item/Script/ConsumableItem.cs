@@ -1,10 +1,11 @@
 // 소비 아이템 (회복, 일시 강화 등)
-enum ConsumableType
+public enum ConsumableType
 {
     HealthPotion,
     StrengthBoost,
     AttackSpeedBoost
 }
+
 public abstract class ConsumableItem : ItemBase
 {
     ConsumableType type;

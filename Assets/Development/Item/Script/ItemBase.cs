@@ -8,7 +8,10 @@ public abstract class ItemBase : MonoBehaviour
     public ParticleSystem collectParticle;
     public AudioClip collectSound;
 
+    // 아이템 효과 적용 메서드
     public abstract void Apply();
+    // 아이템을 획득할 수 있는지 여부를 결정하는 조건 메서드
+    public abstract bool CanCollect(Collider other);
 
     private void Collect()
     {
@@ -22,7 +25,7 @@ public abstract class ItemBase : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(Tag.Player))
+        if (CanCollect(other))
         {
             Collect();
             Destroy(gameObject);

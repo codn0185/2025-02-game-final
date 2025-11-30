@@ -1,10 +1,11 @@
 // 업그레이드 아이템
-enum UpgradeType
+public enum UpgradeType
 {
     DamageUpgrade, // 공격력 증가
     AttackSpeedUpgrade, // 공격 속도 증가
     ShieldUpgrade, // 보호막 강화
 }
+
 public abstract class UpgradeItem : ItemBase
 {
     UpgradeType type;

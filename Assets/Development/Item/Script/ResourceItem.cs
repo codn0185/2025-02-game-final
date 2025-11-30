@@ -1,9 +1,10 @@
 // 자원 아이템 (돈, 특수 재화 등)
-enum ResourceType
+public enum ResourceType
 {
     Gold,
     Gem
 }
+
 public abstract class ResourceItem : ItemBase
 {
     ResourceType type;
