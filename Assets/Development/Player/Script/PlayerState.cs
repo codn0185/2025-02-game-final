@@ -1,3 +1,10 @@
+public enum PlayerStateType
+{
+    Idle, // 정지
+    Move, // 이동 중
+    Dead // 사망
+}
+
 public static class PlayerAnimatorParameter
 {
     public const string Idle = "Idle"; // boolean
@@ -10,6 +17,7 @@ public static class PlayerAnimatorParameter
 public abstract class PlayerState : State
 {
     protected PlayerController player;
+    public PlayerStateType StateType { get; protected set; }
 
     public PlayerState(PlayerController player)
     {
@@ -21,6 +29,7 @@ public class PlayerIdleState : PlayerState
 {
     public PlayerIdleState(PlayerController player) : base(player)
     {
+        StateType = PlayerStateType.Idle;
     }
 
     public override void Enter()
@@ -47,6 +56,7 @@ public class PlayerMoveState : PlayerState
 {
     public PlayerMoveState(PlayerController player) : base(player)
     {
+        StateType = PlayerStateType.Move;
     }
 
     public override void Enter()
@@ -74,6 +84,7 @@ public class PlayerDeadState : PlayerState
 {
     public PlayerDeadState(PlayerController player) : base(player)
     {
+        StateType = PlayerStateType.Dead;
     }
 
     public override void Enter()
