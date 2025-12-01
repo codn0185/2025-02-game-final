@@ -3,27 +3,24 @@ using UnityEngine;
 
 public static class DataUtil
 {
-    public static string DataDirectory = Application.persistentDataPath;
-
+    public static string Dir = Path.Combine(Application.persistentDataPath, "Data");
     public static string LoadJsonString(string filePath)
     {
-        string fullPath = Path.Combine(DataDirectory, filePath);
-        if (File.Exists(fullPath))
+        if (File.Exists(filePath))
         {
-            return File.ReadAllText(fullPath);
+            return File.ReadAllText(filePath);
         }
         return null;
     }
 
-    public static void SaveJsonString(string filePath, string jsonData)
+    public static void SaveJsonString(string jsonData, string filePath)
     {
-        string fullPath = Path.Combine(DataDirectory, filePath);
-        string directory = Path.GetDirectoryName(fullPath);
+        string directory = Path.GetDirectoryName(filePath);
         if (!Directory.Exists(directory))
         {
             Directory.CreateDirectory(directory);
         }
-        File.WriteAllText(fullPath, jsonData);
+        File.WriteAllText(filePath, jsonData);
     }
 
     public static T LoadJson<T>(string filePath) where T : Data
@@ -36,9 +33,17 @@ public static class DataUtil
         return null;
     }
 
-    public static void SaveJson<T>(string filePath, T data) where T : Data
+    public static void SaveJson<T>(T data, string filePath) where T : Data
     {
         string jsonData = JsonUtility.ToJson(data, true);
-        SaveJsonString(filePath, jsonData);
+        SaveJsonString(jsonData, filePath);
+    }
+
+    public static void DeleteFile(string filePath)
+    {
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+        }
     }
 }
