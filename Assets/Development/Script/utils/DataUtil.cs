@@ -46,4 +46,20 @@ public static class DataUtil
             File.Delete(filePath);
         }
     }
+
+    public static void CreateDirectory(string directoryPath)
+    {
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+    }
+
+    public static void DeleteDirectory(string directoryPath)
+    {
+        if (Directory.Exists(directoryPath))
+        {
+            Directory.Delete(directoryPath, true);
+        }
+    }   
 }
