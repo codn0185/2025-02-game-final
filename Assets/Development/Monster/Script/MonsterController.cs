@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class MonsterController : Controller<MonsterFSM>
 {
     private const float DESTROY_DELAY = 2.0f;
+    public static readonly HashSet<MonsterController> Entities = new HashSet<MonsterController>();
 
     protected int maxHealth;
     protected int currentHealth;
@@ -23,10 +25,12 @@ public abstract class MonsterController : Controller<MonsterFSM>
     protected virtual void Awake()
     {
         StateMachine = new MonsterFSM(this);
-        
+
         Rigidbody = GetComponent<Rigidbody>();
         Animator = GetComponent<Animator>();
         healthBar.gameObject.SetActive(false);
+        Entities.Add(this);
+
     }
 
     protected virtual void Start()
@@ -111,10 +115,12 @@ public abstract class MonsterController : Controller<MonsterFSM>
 
     protected void OnTriggerEnter(Collider other)
     {
+
         if (other.CompareTag(Tag.AttackPoint))
         {
             StateMachine.ChangeState(StateMachine.BattleState);
-        }      
+        }
+
     }
 
     protected void OnTriggerExit(Collider other)
@@ -122,6 +128,8 @@ public abstract class MonsterController : Controller<MonsterFSM>
         if (other.CompareTag(Tag.AttackPoint))
         {
             StateMachine.ChangeState(StateMachine.MoveState);
-        }      
+        }
     }
+
+
 }

@@ -1,6 +1,7 @@
 .vscode
 !Assets
 Assets/*
+!Assets/Development
 
 Packages/packages-lock.json
 
