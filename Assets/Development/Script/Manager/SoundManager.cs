@@ -23,6 +23,7 @@ public class _SoundManager : Singleton<_SoundManager>
         }
     }
 
+    // ========== Static Setter Methods ==========
     public static void SetMasterVolume(float volume) => Settings.SetMasterVolume(volume);
     public static void SetBGMVolume(float volume) => Settings.SetBGMVolume(volume);
     public static void SetSFXVolume(float volume) => Settings.SetSFXVolume(volume);
