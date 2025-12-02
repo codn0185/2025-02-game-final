@@ -19,7 +19,7 @@ public abstract class ItemBase : MonoBehaviour
         collectParticle?.Play();
         if (collectSound != null)
         {
-            AudioSource.PlayClipAtPoint(collectSound, transform.position, SoundVolume.SFX.ItemCollect);
+            AudioSource.PlayClipAtPoint(collectSound, transform.position, _SoundManager.SFXVolume);
         }
     }
 

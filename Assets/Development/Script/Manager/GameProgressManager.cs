@@ -21,8 +21,8 @@ public class GameProgressManager : Singleton<GameProgressManager>
 {
     // ========== 현재 진행 상태 ==========
     private GameProgressState currentState = GameProgressState.Idle;
-    private int currentStage = 0;
-    private int currentRound = 0;
+    [SerializeField] private int currentStage = 0;
+    [SerializeField] private int currentRound = 0;
 
     // ========== 속성 ==========
     public GameProgressState CurrentState => currentState;
@@ -33,6 +33,11 @@ public class GameProgressManager : Singleton<GameProgressManager>
     protected override void Awake()
     {
         base.Awake();
+    }
+
+    void Start()
+    {
+        ChangeState(GameProgressState.Playing);
     }
 
     // ========== 스테이지 관리 ==========
@@ -110,6 +115,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
                 break;
             case GameProgressState.Playing:
                 Time.timeScale = 1f;
+                BackgroundManager.Instance.StartSpawningBackgrounds();
                 break;
             case GameProgressState.Paused:
                 Time.timeScale = 0f;
@@ -120,12 +126,16 @@ public class GameProgressManager : Singleton<GameProgressManager>
                 SaveMaxProgressToProfile();  // 프로필에 최고 기록 저장
                 ShowGameOverUI(); // 게임 오버 UI 표시
                 ResetProgress(); // 진행 상황 초기화
+                BackgroundManager.Instance.StopSpawningBackgrounds(); // 배경 소환 중지
+
                 break;
             case GameProgressState.GameClear:
                 Time.timeScale = 0f;
                 SaveMaxProgressToProfile();  // 프로필에 최고 기록 저장
                 ShowGameClearUI(); // 게임 클리어 UI 표시
                 ResetProgress(); // 진행 상황 초기화
+                BackgroundManager.Instance.StopSpawningBackgrounds(); // 배경 소환 중지
+
                 break;
         }
     }
