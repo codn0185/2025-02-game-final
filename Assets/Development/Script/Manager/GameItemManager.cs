@@ -5,21 +5,13 @@ using UnityEngine;
 /// 게임 진행 중 획득한 아이템을 관리하는 매니저 클래스
 /// 재화, 소모, 강화 아이템을 각각 추적하고 지속형 소모 아이템의 효과를 관리합니다.
 /// </summary>
-public class GameItemManager : MonoBehaviour
+public class GameItemManager : Singleton<GameItemManager>
 {
-    public static GameItemManager Instance { get; private set; }
-
     // 아이템 획득 데이터 저장
-
-    private readonly Dictionary<ResourceType, int> _resources = new();
-    private readonly Dictionary<UpgradeType, int> _upgrades = new();
-    private readonly Dictionary<InstantConsumableType, int> _instantConsumables = new();
-    private readonly Dictionary<TimedConsumableType, int> _timedConsumables = new();
-
-    public Dictionary<ResourceType, int> Resources => _resources;
-    public Dictionary<UpgradeType, int> Upgrades => _upgrades;
-    public Dictionary<InstantConsumableType, int> InstantConsumables => _instantConsumables;
-    public Dictionary<TimedConsumableType, int> TimedConsumables => _timedConsumables;
+    public Dictionary<ResourceType, int> Resources { get; private set; } = new();
+    public Dictionary<UpgradeType, int> Upgrades { get; private set; } = new();
+    public Dictionary<InstantConsumableType, int> InstantConsumables { get; private set; } = new();
+    public Dictionary<TimedConsumableType, int> TimedConsumables { get; private set; } = new();
 
     // TimedEffectItem 관리
     private class TimedEffect
@@ -35,77 +27,67 @@ public class GameItemManager : MonoBehaviour
 
     private readonly List<TimedEffect> _activeEffects = new();
 
-    // === 생명주기 메서드 ===
-
-    private void Awake()
+    // === Unity Lifecycle ===
+    void Update()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
+        UpdateTimedEffects();
     }
 
-    private void Update()
-    {
-        // 지속형 아이템 효과 관리
-    }
 
     // === 아이템 추가 메서드 ===
-
     public void AddResource(ResourceItem item)
     {
-        if (_resources.ContainsKey(item.type))
-            _resources[item.type] += item.amount;
+        if (item == null) return;
+        if (Resources.ContainsKey(item.type))
+            Resources[item.type] += item.amount;
         else
-            _resources[item.type] = item.amount;
+            Resources[item.type] = item.amount;
     }
 
     public void AddUpgrade(UpgradeItem item)
     {
         if (item == null) return;
-        if (_upgrades.ContainsKey(item.type))
-            _upgrades[item.type]++;
+        if (Upgrades.ContainsKey(item.type))
+            Upgrades[item.type]++;
         else
-            _upgrades[item.type] = 1;
+            Upgrades[item.type] = 1;
         item.Apply();
     }
 
     public void AddInstantConsumable(InstantConsumableItem item)
     {
         if (item == null) return;
-        if (_instantConsumables.ContainsKey(item.type))
-            _instantConsumables[item.type]++;
+        if (InstantConsumables.ContainsKey(item.type))
+            InstantConsumables[item.type]++;
         else
-            _instantConsumables[item.type] = 1;
+            InstantConsumables[item.type] = 1;
         item.Apply();
     }
 
     public void AddTimedConsumable(TimedConsumableItem item)
     {
         if (item == null) return;
-        if (_timedConsumables.ContainsKey(item.type))
-            _timedConsumables[item.type]++;
+        if (TimedConsumables.ContainsKey(item.type))
+            TimedConsumables[item.type]++;
         else
-            _timedConsumables[item.type] = 1;
+            TimedConsumables[item.type] = 1;
         item.Apply();
         _activeEffects.Add(new TimedEffect(item, item.duration));
     }
 
     // === 지속형 아이템 효과 관리 메서드 ===
-
-    public void UpdateTimedEffects(float deltaTime)
+    public void UpdateTimedEffects()
     {
         for (int i = _activeEffects.Count - 1; i >= 0; i--)
         {
             TimedEffect effect = _activeEffects[i];
-            effect.remainingTime -= deltaTime;
+            effect.remainingTime -= Time.deltaTime;
 
             if (effect.remainingTime <= 0)
             {
                 effect.item.Revert();
                 _activeEffects.RemoveAt(i);
+                i--;
             }
         }
     }
@@ -115,10 +97,10 @@ public class GameItemManager : MonoBehaviour
     // 아이템 획득 정보 초기화
     public void Clear()
     {
-        _resources.Clear();
-        _upgrades.Clear();
-        _instantConsumables.Clear();
-        _timedConsumables.Clear();
+        Resources.Clear();
+        Upgrades.Clear();
+        InstantConsumables.Clear();
+        TimedConsumables.Clear();
         // 모든 활성 효과 Revert() 실행
         foreach (var effect in _activeEffects)
         {

@@ -3,10 +3,10 @@ using UnityEngine;
 
 public abstract class ItemBase : MonoBehaviour
 {
-    public string itemName;
-    public string itemDescription;
-    public ParticleSystem collectParticle;
-    public AudioClip collectSound;
+    [SerializeField] private string itemName;
+    [SerializeField] private string itemDescription;
+    [SerializeField] private ParticleSystem collectParticle;
+    [SerializeField] private AudioClip collectSound;
 
     public string TargetTag => Tag.Player;
 
@@ -16,7 +16,7 @@ public abstract class ItemBase : MonoBehaviour
     private void Collect()
     {
         Apply();
-        collectParticle?.Play();
+        collectParticle.Play();
         if (collectSound != null)
         {
             AudioSource.PlayClipAtPoint(collectSound, transform.position, _SoundManager.SFXVolume);
