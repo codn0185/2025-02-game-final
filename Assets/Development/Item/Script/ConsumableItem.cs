@@ -14,7 +14,7 @@ public abstract class InstantConsumableItem : ConsumableItem
 
     public override void Apply()
     {
-        GameItemManager.Instance.AddInstantConsumable(this);
+        RunItemManager.Instance.AddInstantConsumable(this);
     }
 }   
 
@@ -31,7 +31,7 @@ public abstract class TimedConsumableItem : ConsumableItem
 
     public override void Apply()
     {
-        GameItemManager.Instance.AddTimedConsumable(this);
+        RunItemManager.Instance.AddTimedConsumable(this);
     }
     public abstract void Revert();
 }

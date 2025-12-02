@@ -14,7 +14,7 @@ public abstract class UpgradeItem : ItemBase
 
     public override void Apply()
     {
-        GameItemManager.Instance.AddUpgrade(this);
+        RunItemManager.Instance.AddUpgrade(this);
     }
 }
 

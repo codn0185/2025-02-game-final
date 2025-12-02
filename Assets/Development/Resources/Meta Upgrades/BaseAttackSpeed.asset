@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edaf5b1faadb27442a56deafc708e992, type: 3}
+  m_Name: BaseAttackSpeed
+  m_EditorClassIdentifier: 
+  Type: 2
+  Name: Attack Speed Upgrade
+  Description: Increase Base Attack Speed
+  Icon: {fileID: 0}
+  MaxLevel: 5
+  IncreaseRatio: 0.05
+  CostPerLevel: 2c0100005802000084030000b0040000dc050000
