@@ -13,7 +13,7 @@ public abstract class ResourceItem : ItemBase
     public int amount;
     public override void Apply()
     {
-        GameItemManager.Instance.AddResource(this);
+        RunItemManager.Instance.AddResource(this);
     }
 }
 

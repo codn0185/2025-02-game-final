@@ -5,7 +5,7 @@ using UnityEngine;
 /// 게임 진행 중 획득한 아이템을 관리하는 매니저 클래스
 /// 재화, 소모, 강화 아이템을 각각 추적하고 지속형 소모 아이템의 효과를 관리합니다.
 /// </summary>
-public class GameItemManager : Singleton<GameItemManager>
+public class RunItemManager : Singleton<RunItemManager>
 {
     // 아이템 획득 데이터 저장
     public Dictionary<ResourceType, int> Resources { get; private set; } = new();
