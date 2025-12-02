@@ -12,6 +12,8 @@ TagManager:
   - Item
   - ATK_Penetration
   - ATK_Damage
+  - AttackPoint
+  - Monster
   layers:
   - Default
   - TransparentFX
