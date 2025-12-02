@@ -1,13 +1,19 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
-    public GameObject monsterPrefab;
-    public GameObject itemPrefab;
+    public int[] enemyRatio;
+    int[] spawnedEnemies;
+    int enemyCount = 0;
+    public GameObject[] monsterPrefabs;
+    public GameObject[] itemPrefabs;
+
     void Start()
     {
+        spawnedEnemies = new int[monsterPrefabs.Length];
         if (instance == null)
         {
             instance = this;
@@ -18,7 +24,7 @@ public class SpawnManager : MonoBehaviour
         }
 
         StartCoroutine(Spawn_Monster_Coroutine());
-        StartCoroutine(Spawn_Item_Coroutine());
+        // StartCoroutine(Spawn_Item_Coroutine());
     }
 
     void Update()
@@ -55,7 +61,22 @@ public class SpawnManager : MonoBehaviour
             Round.RoundData rd = GameManager.instance.CurrentRoundData;
             float xPos = Random.Range(-4.0f, 4.0f);
             float zPos = Random.Range(33.5f, 55.5f);
-            Instantiate(monsterPrefab, new Vector3(xPos, 0.32f, zPos), Quaternion.Euler(0, 180, 0));
+            Vector3 spawnPosition = new Vector3(xPos, 0.32f, zPos);
+            if (enemyCount % 10 > 3)
+            {
+
+                for (int i = 0; i < monsterPrefabs.Length; i++)
+                {
+                    if (enemyRatio[i] > spawnedEnemies[i] / enemyCount * 100)
+                    {
+                        Instantiate(monsterPrefabs[i], spawnPosition, Quaternion.Euler(0, 180, 0));
+                        break;
+                    }
+                }
+
+            }
+            else
+                Instantiate(monsterPrefabs[Random.Range(0, monsterPrefabs.Length)], spawnPosition, Quaternion.Euler(0, 180, 0));
 
             float wait = Mathf.Max(0.01f, Random.Range(1f, 1.5f) / rd.mob_spawn_rate);
             yield return new WaitForSeconds(wait);
@@ -72,7 +93,7 @@ public class SpawnManager : MonoBehaviour
         if (GameManager.instance != null && GameManager.instance.CurrentState == GameState.GAME_PLAY)
         {
             float zPos = Random.Range(33.5f, 55.5f);
-            Instantiate(itemPrefab, new Vector3(0, 3, zPos), Quaternion.identity);
+            Instantiate(itemPrefabs[0], new Vector3(0, 3, zPos), Quaternion.identity);
             yield return new WaitForSeconds(5.0f);
         }
         else

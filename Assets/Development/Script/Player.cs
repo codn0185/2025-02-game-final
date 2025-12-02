@@ -4,31 +4,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Rigidbody rigidbody;
+    Rigidbody rb;
     Animator animator;
-
-    Vector3 startPosition;
-    Vector3 endPosition;
-
+    public float moveDistance;
     // Player
     public float speed;
-
-    // Bullet
-    public GameObject bulletPrefab;
+    // Spell effects
+    public GameObject[] bulletPrefabs;
     static float bullet_gap = 0.25f;
-
     // Particle
     public ParticleSystem LevelUp_Particle;
-
     // Audio
-    public SoundManager audio;
-
+    public SoundManager soundManager;
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-        StartCoroutine(Bullet_Coroutine());
+        StartCoroutine(Attack_Coroutine());
     }
 
     void Update()
@@ -38,44 +31,39 @@ public class Player : MonoBehaviour
             return;
         }
         // 마우스 좌클릭
-        if (Input.GetMouseButtonDown(0))
-        {
-            startPosition = Input.mousePosition;
-        }
+        // Moves to clicked position
         if (Input.GetMouseButton(0))
         {
-            endPosition = Input.mousePosition;
-            if (Vector3.Distance(startPosition, endPosition) > 0.5f)
+            float destX = (Input.mousePosition.x / Screen.width * moveDistance) - moveDistance / 2;
+
+            float distance = rb.position.x - destX;
+
+            // If the distance isn't that big
+            if (distance < -0.1f)
             {
-                Vector3 distance = endPosition - startPosition;
-                int sign = (int)Mathf.Sign(distance.x);
-                if (sign == 1) // 오른쪽 스와이프
-                {
-                    startPosition.x = endPosition.x - 10.0f;
+                Vector3 velocity = rb.velocity;
+                velocity.x = speed;
+                rb.velocity = velocity;
 
-                    Vector3 v = rigidbody.velocity;
-                    v.x = speed;
-                    rigidbody.velocity = v;
+                AnimatorChange("RUN");
+            }
+            else if (distance > 0.1f)
+            {
 
-                    AnimatorChange("RUN");
-                }
-                else if (sign == -1) // 왼쪽 스와이프
-                {
-                    startPosition.x = endPosition.x + 10.0f;
+                Vector3 velocity = rb.velocity;
+                velocity.x = -speed;
+                rb.velocity = velocity;
 
-                    Vector3 v = rigidbody.velocity;
-                    v.x = -speed;
-                    rigidbody.velocity = v;
-
-                    AnimatorChange("RUN");
-                }
+                AnimatorChange("RUN");
+            }
+            else
+            {
+                rb.velocity = Vector3.zero;
             }
         }
         if (Input.GetMouseButtonUp(0))
         {
-            startPosition = Vector3.zero;
-            endPosition = Vector3.zero;
-            rigidbody.velocity = Vector3.zero;
+            rb.velocity = Vector3.zero;
 
             AnimatorChange("IDLE");
         }
@@ -103,32 +91,32 @@ public class Player : MonoBehaviour
         animator.SetBool(temp, true);
     }
 
-    void Bullet_Make()
+    void Attack()
     {
         AnimatorChange("SHOOT");
         SoundManager.instance.AudioStart(SoundManager.AudioValue.Shoot);
         foreach (float posX in BulletPosX())
         {
-            GameObject bullet = Instantiate(bulletPrefab, new Vector3(transform.position.x + posX, transform.position.y + 0.5f, transform.position.z + 1.0f), Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefabs[GameManager.instance.attack_type], new Vector3(transform.position.x + posX, transform.position.y + 0.5f, transform.position.z + 1.0f), Quaternion.identity);
             bullet.GetComponent<Bullet>().Initialize(
                 damage: GameManager.instance.bullet_damage,
-                penetration_count: GameManager.instance.bullet_penetration_count
+                hit_count: GameManager.instance.bullet_hit_count
             );
         }
     }
 
-    IEnumerator Bullet_Coroutine()
+    IEnumerator Attack_Coroutine()
     {
         if (GameManager.instance != null && GameManager.instance.CurrentState == GameState.GAME_PLAY)
         {
-            Bullet_Make();
-            yield return new WaitForSeconds(GameManager.instance.bullet_time);
+            Attack();
+            yield return new WaitForSeconds(5 / GameManager.instance.attack_speed);
         }
         else
         {
             yield return new WaitForSeconds(1f);
         }
-        StartCoroutine(Bullet_Coroutine());
+        StartCoroutine(Attack_Coroutine());
     }
 
     float[] BulletPosX()

@@ -29,11 +29,13 @@ public class GameManager : MonoBehaviour
     // 공격 관련
     public const int MAX_BULLET_DAMAGE = 100;
     public const int MAX_BULLET_COUNT = 15;
-    public const float MIN_BULLET_TIME = 0.05f;
+    public const float MIN_ATTACK_SPEED = 0.05f;
+    // How many times player attacks per 5 seconds
+    public int attack_speed = 5;
+    public int attack_type;
     public int bullet_damage;
     public int bullet_count;
-    public float bullet_time;
-    public int bullet_penetration_count = 1;
+    public int bullet_hit_count = 1;
 
     // 플레이 데이터
     float play_time = 0f;
@@ -187,11 +189,11 @@ public class GameManager : MonoBehaviour
         switch (tag)
         {
             case ItemManager.ATK_Speed.tag:
-                bullet_time *= 0.9f;
-                if (bullet_time < MIN_BULLET_TIME)
-                {
-                    bullet_time = MIN_BULLET_TIME;
-                }
+                // attack_speed *= 0.9f;
+                // if (attack_speed < MIN_ATTACK_SPEED)
+                // {
+                //     attack_speed = MIN_ATTACK_SPEED;
+                // }
                 return true;
             case ItemManager.ATK_Count.tag:
                 if (bullet_count < MAX_BULLET_COUNT)
@@ -200,7 +202,7 @@ public class GameManager : MonoBehaviour
                 }
                 return true;
             case ItemManager.ATK_Penetration.tag:
-                bullet_penetration_count++;
+                bullet_hit_count++;
                 return true;
             case ItemManager.ATK_Damage.tag:
                 bullet_damage++;

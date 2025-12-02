@@ -1,25 +1,26 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Monster : MonoBehaviour
+public class Monster2 : MonoBehaviour
 {
-    public float speed;
+    public static readonly HashSet<Monster> Entities = new HashSet<Monster>();
+    public float baseSpeed = 1;
+    public float currentSpeed = 1;
     public int hp;
     Animator animator;
     bool isDead = false;
     public Slider healthBar;
     public int max_hp = 3;
-    public GameObject hitParticle;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-
         var rd = GameManager.instance.CurrentRoundData;
         max_hp = Mathf.RoundToInt(rd.mob_hp_rate * max_hp);
         hp = max_hp;
-        speed = speed * rd.mob_speed_rate;
+        currentSpeed = baseSpeed * rd.mob_speed_rate;
         healthBar.gameObject.SetActive(false);
     }
 
@@ -29,10 +30,10 @@ public class Monster : MonoBehaviour
         {
             return;
         }
-        transform.position += speed * Time.deltaTime * transform.forward;
+        transform.position += currentSpeed * Time.deltaTime * transform.forward;
     }
 
-    void OnTriggerEnter(Collider other)
+    public void OnHit(Collider other)
     {
         if (other.CompareTag("Bullet"))
         {
@@ -45,10 +46,9 @@ public class Monster : MonoBehaviour
                 healthBar.gameObject.SetActive(true);
             }
 
-            Instantiate(hitParticle, other.gameObject.transform.position, Quaternion.identity);
-            SoundManager.instance.AudioStart(SoundManager.AudioValue.Hit);
-
             Bullet bullet = other.GetComponentInParent<Bullet>();
+            Instantiate(bullet.hitParticle, transform.position, Quaternion.identity);
+
 
             hp = Math.Max(hp - bullet.damage, 0);
             healthBar.maxValue = max_hp;
@@ -58,11 +58,29 @@ public class Monster : MonoBehaviour
                 SetDeath();
             }
 
-            if (--bullet.penetration_count <= 0)
+            if (--bullet.hit_count <= 0)
             {
-                Destroy(other.transform.parent.gameObject);
+                bullet.OnHit();
             }
+            if (bullet.isKnockback)
+            {
+                transform.position += bullet.knockbackPower * -transform.forward;
+            }
+            if (bullet.isSlow)
+            {
+                currentSpeed = baseSpeed * bullet.slowPower;
+            }
+            if (bullet.isChain)
+            {
+
+            }
+
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        OnHit(other);
     }
 
     void SetDeath()
