@@ -6,4 +6,6 @@ public static class Tag
     public const string Item = "Item";
     public const string Projectile = "Projectile";
     public const string AttackPoint = "AttackPoint";
+    public const string Bullet = "Bullet";
+
 }
