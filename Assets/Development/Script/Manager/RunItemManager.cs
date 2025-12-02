@@ -28,6 +28,11 @@ public class RunItemManager : Singleton<RunItemManager>
     private readonly List<TimedEffect> _activeEffects = new();
 
     // === Unity Lifecycle ===
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     void Update()
     {
         UpdateTimedEffects();
