@@ -81,8 +81,13 @@ public class ProfileManager : MonoBehaviour
         DataUtil.CreateDirectory(GetProfileDir(UID));
         PlayData = new PlayData(UID);
         GameData = new GameData(UID);
-        ChangeState(ProfileState.Active);
         SaveActiveProfile();
+    }
+
+    public void CreateAndActiveProfile()
+    {
+        CreateProfile();
+        ActivateProfile();
     }
 
     public void LoadProfile(int uid)
@@ -92,8 +97,13 @@ public class ProfileManager : MonoBehaviour
         UID = uid;
         PlayData = PlayData.Load(uid) ?? new PlayData(uid);
         GameData = GameData.Load(uid) ?? new GameData(uid);
-        ChangeState(ProfileState.Active);
         SaveActiveProfile();
+    }
+
+    public void LoadAndActiveProfile(int uid)
+    {
+        LoadProfile(uid);
+        ActivateProfile();
     }
 
     public void SaveActiveProfile()
