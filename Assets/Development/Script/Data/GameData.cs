@@ -2,38 +2,8 @@ using System.IO;
 
 public class GameData : UserData
 {
-    public class StageProgress
-    {
-        public int Stage { get; private set; }
-        public int Round { get; private set; }
-        public StageProgress(int stage, int round)
-        {
-            Stage = stage;
-            Round = round;
-        }
-
-        public void Update(StageProgress stageProgress)
-        {
-            Stage = stageProgress.Stage;
-            Round = stageProgress.Round;
-        }
-
-        public static bool operator >(StageProgress a, StageProgress b)
-        {
-            if (a.Stage > b.Stage) return true;
-            if (a.Stage == b.Stage && a.Round > b.Round) return true;
-            return false;
-        }
-
-        public static bool operator <(StageProgress a, StageProgress b)
-        {
-            if (a.Stage < b.Stage) return true;
-            if (a.Stage == b.Stage && a.Round < b.Round) return true;
-            return false;
-        }
-    }
-
-    public StageProgress MaxStageProgress { get; private set; } = new StageProgress(0, 0);
+    public int MaxStage { get; private set; } = 0;
+    public int MaxRound { get; private set; } = 0;
     public int TotalGold { get; set; } = 0; // 전체 획득 골드
     public int CurrentGold { get; set; } = 0; // 현재 보유 골드
     public int TotalGems { get; set; } = 0; // 전체 획득 보석
@@ -55,17 +25,13 @@ public class GameData : UserData
         DataUtil.DeleteFile(FilePath);
     }
 
-    public void UpdateMaxStageProgress(StageProgress newProgress)
+    public void UpdateMaxProgress(int stage, int round)
     {
-        if (newProgress > MaxStageProgress)
+        if (stage > MaxStage || (stage == MaxStage && round > MaxRound))
         {
-            MaxStageProgress.Update(newProgress);
+            MaxStage = stage;
+            MaxRound = round;
         }
-    }
-
-    public void UpdateMaxStageProgress(int stage, int round)
-    {
-        UpdateMaxStageProgress(new StageProgress(stage, round));
     }
 
     public static GameData Load(int uid)
