@@ -22,6 +22,8 @@ public abstract class MonsterController : Controller<MonsterFSM>
     public Animator Animator { get; private set; }
     public Slider healthBar;
 
+    // === Unity Lifecycle ===
+
     protected virtual void Awake()
     {
         StateMachine = new MonsterFSM(this);
@@ -43,26 +45,28 @@ public abstract class MonsterController : Controller<MonsterFSM>
         StateMachine.Update();
     }
 
-    public void Move()
+    // === Monster Actions ===
+
+    public virtual void Move()
     {
         Rigidbody.MovePosition(transform.position + moveSpeed * Time.deltaTime * transform.forward);
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         Animator.SetTrigger(MonsterAnimatorParameter.Attack.ToString());
         // GameManager.instance.DecreaseHP(attackDamage);
     }
 
-    public void Die()
+    public virtual void Die()
     {
         GetComponent<Collider>().enabled = false;
         healthBar.gameObject.SetActive(false);
-        // GameManager.instance.AddExperience(experiencePoints);
+        GameProgressManager.Instance.AddExperience(experiencePoints);
         Destroy(gameObject, DESTROY_DELAY);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (StateMachine.CurrentState == StateMachine.DeadState) return;
         Animator.SetTrigger(MonsterAnimatorParameter.Hit);
@@ -73,13 +77,6 @@ public abstract class MonsterController : Controller<MonsterFSM>
         {
             StateMachine.ChangeState(StateMachine.DeadState);
         }
-    }
-
-    private void UpdateHealthBar()
-    {
-        if (healthBar == null) return;
-        healthBar.maxValue = maxHealth;
-        healthBar.value = currentHealth;
     }
 
     public void StartAttackCoroutine()
@@ -99,6 +96,15 @@ public abstract class MonsterController : Controller<MonsterFSM>
         }
     }
 
+    // === Helper Methods ===
+
+    private void UpdateHealthBar()
+    {
+        if (healthBar == null) return;
+        healthBar.maxValue = maxHealth;
+        healthBar.value = currentHealth;
+    }
+
     private IEnumerator AttackRoutine()
     {
         while (true)
@@ -112,6 +118,8 @@ public abstract class MonsterController : Controller<MonsterFSM>
     {
         return currentHealth <= 0;
     }
+
+    // === Trigger Events ===
 
     protected void OnTriggerEnter(Collider other)
     {
