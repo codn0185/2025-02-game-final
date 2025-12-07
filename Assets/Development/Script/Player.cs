@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
         if (GameManager.instance != null && GameManager.instance.CurrentState == GameState.GAME_PLAY)
         {
             Attack();
-            yield return new WaitForSeconds(5 / GameManager.instance.attack_speed);
+            yield return new WaitForSeconds(5.0f / GameManager.instance.attack_speed);
         }
         else
         {

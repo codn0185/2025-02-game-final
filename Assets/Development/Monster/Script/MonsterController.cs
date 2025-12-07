@@ -9,12 +9,13 @@ public abstract class MonsterController : Controller<MonsterFSM>
     private const float DESTROY_DELAY = 2.0f;
     public static readonly HashSet<MonsterController> Entities = new HashSet<MonsterController>();
 
-    protected int maxHealth;
+    public int maxHealth;
     protected int currentHealth;
+    public float baseMoveSpeed;
     protected float moveSpeed;
-    protected int attackDamage;
-    protected float attackSpeed;
-    protected int experiencePoints;
+    public int attackDamage;
+    public float attackSpeed;
+    public int experiencePoints;
 
     private Coroutine attackCoroutine;
 
@@ -30,7 +31,8 @@ public abstract class MonsterController : Controller<MonsterFSM>
         Animator = GetComponent<Animator>();
         healthBar.gameObject.SetActive(false);
         Entities.Add(this);
-
+        moveSpeed = baseMoveSpeed;
+        currentHealth = maxHealth;
     }
 
     protected virtual void Start()
@@ -115,7 +117,6 @@ public abstract class MonsterController : Controller<MonsterFSM>
 
     protected void OnTriggerEnter(Collider other)
     {
-
         if (other.CompareTag(Tag.AttackPoint))
         {
             StateMachine.ChangeState(StateMachine.BattleState);

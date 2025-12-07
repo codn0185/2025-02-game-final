@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b496d77b7929de058aeab6e0b93b099, type: 3}
+  m_Name: Stage2Settings
+  m_EditorClassIdentifier: 
+  enemies: []
+  totalEnemies: 320000004600000064000000
+  enemyRatio1: 5a0000000a00000000000000
+  enemyRatio2: 3c0000001e0000000a000000
+  enemyRatio3: 280000002800000014000000
