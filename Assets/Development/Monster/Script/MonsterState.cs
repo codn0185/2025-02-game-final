@@ -36,18 +36,17 @@ public class MonsterIdleState : MonsterState
 
     public override void Enter()
     {
-        monster.Animator.SetBool(MonsterAnimatorParameter.Idle, true);
+        monster.OnEnterIdle();
     }
 
     public override void Update()
     {
-        if (monster.IsDead())
-            monster.StateMachine.ChangeState(monster.StateMachine.DeadState);
+        monster.OnUpdateIdle();
     }
 
     public override void Exit()
     {
-        monster.Animator.SetBool(MonsterAnimatorParameter.Idle, false);
+        monster.OnExitIdle();
     }
 }
     
@@ -60,22 +59,17 @@ public class MonsterMoveState : MonsterState
 
     public override void Enter()
     {
-        monster.Animator.SetBool(MonsterAnimatorParameter.Move, true);
+        monster.OnEnterMove();
     }
 
     public override void Update()
     {
-        if (monster.IsDead())
-            monster.StateMachine.ChangeState(monster.StateMachine.DeadState);
-        // else if (monster.ReachedAttackPoint())
-        //     monster.StateMachine.ChangeState(monster.StateMachine.BattleState);
-        else
-            monster.Move();
+        monster.OnUpdateMove();
     }
 
     public override void Exit()
     {
-        monster.Animator.SetBool(MonsterAnimatorParameter.Move, false);
+        monster.OnExitMove();
     }
 }
 
@@ -88,22 +82,17 @@ public class MonsterBattleState : MonsterState
 
     public override void Enter()
     {
-        monster.Animator.SetBool(MonsterAnimatorParameter.Battle, true);
-        monster.StartAttackCoroutine();
+        monster.OnEnterBattle();
     }
 
     public override void Update()
     {
-        if (monster.IsDead())
-            monster.StateMachine.ChangeState(monster.StateMachine.DeadState);
-        // else if (!monster.ReachedAttackPoint())
-        //     monster.StateMachine.ChangeState(monster.StateMachine.MoveState);
+        monster.OnUpdateBattle();
     }
 
     public override void Exit()
     {
-        monster.Animator.SetBool(MonsterAnimatorParameter.Battle, false);
-        monster.StopAttackCoroutine();
+        monster.OnExitBattle();
     }
 }
 
@@ -116,16 +105,16 @@ public class MonsterDeadState : MonsterState
 
     public override void Enter()
     {
-        monster.Animator.SetBool(MonsterAnimatorParameter.Dead, true);
-        monster.Die();
+        monster.OnEnterDead();
     }
 
     public override void Update()
     {
+        monster.OnUpdateDead();
     }
 
     public override void Exit()
     {
-        monster.Animator.SetBool(MonsterAnimatorParameter.Dead, false);
+        monster.OnExitDead();
     }
 }
