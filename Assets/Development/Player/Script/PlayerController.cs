@@ -3,18 +3,20 @@ using UnityEngine;
 
 public class PlayerController : Controller<PlayerFSM>
 {
+    [SerializeField] private float moveSpeed = 5.0f;
+    [SerializeField] private float attackSpeed = 2.0f;
+
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
 
-    public float moveSpeed = 5.0f;
-    public float attackSpeed = 2.0f;
-
     private Coroutine attackCoroutine;
+
+    // === Unity Lifecycle ===
 
     protected void Awake()
     {
         StateMachine = new PlayerFSM(this);
-        
+
         Rigidbody = GetComponent<Rigidbody>();
         Animator = GetComponent<Animator>();
     }
@@ -27,6 +29,8 @@ public class PlayerController : Controller<PlayerFSM>
     protected void Update()
     {
     }
+
+    // === Player Actions ===
 
     public void StartMove()
     {
@@ -60,6 +64,13 @@ public class PlayerController : Controller<PlayerFSM>
         }
     }
 
+    public void TakeDamage()
+    {
+        Animator.SetTrigger(PlayerAnimatorParameter.Hit);
+    }
+
+    // === Helper Methods ===
+
     private IEnumerator AttackCoroutine()
     {
         while (true)
@@ -74,10 +85,6 @@ public class PlayerController : Controller<PlayerFSM>
         Animator.SetTrigger(PlayerAnimatorParameter.Attack);
     }
 
-    public void TakeDamage()
-    {
-        Animator.SetTrigger(PlayerAnimatorParameter.Hit);
-    }
 
     public bool HasMovementInput()
     {
@@ -88,5 +95,12 @@ public class PlayerController : Controller<PlayerFSM>
     {
         // 사망 조건 구현
         return false;
+    }
+
+    // === Trigger Events ===
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        // 충돌 처리 구현
     }
 }
