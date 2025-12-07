@@ -40,7 +40,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
     public int CurrentHealth => currentHealth;
     public int MaxHealth => maxHealth;
     public bool IsReachedAttackPoint { get; set; } = false;
-    public bool IsDead => currentHealth <= 0;
+    public bool IsDead { get; private set; } = false;
 
     // === Unity Lifecycle ===
     
@@ -181,6 +181,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
         if (StateMachine.CurrentState == StateMachine.DeadState) return;
         Animator.SetTrigger(MonsterAnimatorParameter.Hit);
         currentHealth = Mathf.Max(currentHealth - damage, 0);
+        IsDead = currentHealth <= 0;
         UpdateHealthBar();
     }
 

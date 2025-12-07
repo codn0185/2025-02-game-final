@@ -91,7 +91,7 @@ public abstract class CommonMonsterBase : MonsterController, IStoppable, IKnockb
     {
         if (other.CompareTag(Tag.Bullet))
         {
-            if (IsDead())
+            if (IsDead)
             {
                 return;
             }
