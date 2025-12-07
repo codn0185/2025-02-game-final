@@ -13,7 +13,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
 {
     // === Constants ===
     private const float DESTROY_DELAY = 2.0f;
-    
+
     // === Static Collections ===
     /// <summary>
     /// 현재 활성화된 모든 몬스터 인스턴스
@@ -34,7 +34,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
     // === Public Properties ===
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
-    
+
     [SerializeField] private Slider healthBar;
 
     public int CurrentHealth => currentHealth;
@@ -43,7 +43,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
     public bool IsDead { get; private set; } = false;
 
     // === Unity Lifecycle ===
-    
+
     protected virtual void Awake()
     {
         StateMachine = new MonsterFSM(this);
@@ -65,7 +65,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
         StateMachine.Update();
     }
 
-    
+
     // === Trigger Events ===
     protected virtual void OnTriggerEnter(Collider other)
     {
@@ -216,7 +216,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
     {
         if (healthBar == null)
             return;
-            
+
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
     }

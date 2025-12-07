@@ -38,14 +38,10 @@ public abstract class CommonMonsterBase : MonsterController, IStoppable, IKnockb
         moveSpeed = originalSpeed;
     }
 
-    protected new void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
-
-        if (other.CompareTag(Tag.AttackPoint))
-        {
-            StateMachine.ChangeState(StateMachine.BattleState);
-        }
-        else if (other.CompareTag(Tag.Bullet))
+        base.OnTriggerEnter(other);
+        if (other.CompareTag(Tag.Bullet))
             OnHit(other);
 
     }
