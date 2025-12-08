@@ -204,7 +204,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
         GetComponent<Collider>().enabled = false;
         healthBar.gameObject.SetActive(false);
         GameProgressManager.Instance.AddExperience(experiencePoints);
-        GameProgressManager.Instance.ADDCoins(dropCoins);
+        GameProgressManager.Instance.AddCoins(dropCoins);
         GameProgressManager.Instance.AddGems(dropGems);
         Entities.Remove(this);
         Destroy(gameObject, DESTROY_DELAY);
