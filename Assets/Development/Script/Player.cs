@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     // Player
     public float speed;
     public float attack_speed;
-    public int attack_type;
+    public MagicType magicType;
     private Weapon weapon;
     // Spell effects
     public GameObject[] bulletPrefabs;
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
             weaponBaseSettings = Resources.Load<WeaponBaseSettingSO>("WeaponBase");
         }
 
-        weapon = weaponBaseSettings.weapons[attack_type];
+        weapon = weaponBaseSettings.weapons[(int)magicType];
         
         // 공격 속도 업그레이드 적용
         attack_speed = weapon.attack_speed;
@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
     {
         AnimatorChange("SHOOT");
         
-        GameObject bullet = Instantiate(bulletPrefabs[attack_type], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z + 1.0f), Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefabs[(int)magicType], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z + 1.0f), Quaternion.identity);
 
         // 업그레이드가 적용된 무기 데이터 생성
         Weapon upgradedWeapon = ApplyUpgradesToWeapon(weapon);
@@ -208,8 +208,11 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void SetAttackType(int type)
+    public void SetMagicType(MagicType type)
     {
-        attack_type = type;
+        magicType = type;
+        weapon = weaponBaseSettings.weapons[(int)type];
+        attack_speed = weapon.attack_speed;
+        ApplyAttackSpeedUpgrade();
     }
 }
