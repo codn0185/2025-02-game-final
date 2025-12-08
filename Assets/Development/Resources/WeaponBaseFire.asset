@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponBaseFire
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   projectileSpeed: 10
-  attack_speed: 10
+  attack_speed: 5
   life_time: 10
   damage: 20
   isKnockback: 0

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: WeaponBaseLightning
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   projectileSpeed: 15
-  attack_speed: 15
+  attack_speed: 5
   life_time: 10
-  damage: 0
+  damage: 10
   isKnockback: 0
   knockbackPower: 1
   isSlow: 0
@@ -25,5 +25,5 @@ MonoBehaviour:
   explosionSize: 3
   lingerDuration: 0
   isChain: 1
-  chainSize: 5
+  chainSize: 10
   chainCount: 3

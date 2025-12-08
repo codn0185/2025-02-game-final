@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
     int max_player_hp = 10;
     int player_hp = 0;
     int kill_count = 0;
-    public Round.RoundData CurrentRoundData { get; private set; }
     int game_round = 0;
     float round_time = 0f;
 
@@ -180,7 +179,6 @@ public class GameManager : MonoBehaviour
         }
 
         FillUpHP();
-        CurrentRoundData = Round.data[game_round];
         UIManager.instance.UpdateRoundText(game_round, Round.MAX_ROUND);
     }
 

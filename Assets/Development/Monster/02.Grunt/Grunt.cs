@@ -10,12 +10,12 @@ public class Grunt : CommonMonsterBase
     {
         base.Awake();
 
-        maxHealth = 100;
-        currentHealth = maxHealth;
-        moveSpeed = 1.5f;
-        attackDamage = 10;
-        attackSpeed = 1.8f;
-        experiencePoints = 20;
+        // maxHealth = 100;
+        // currentHealth = maxHealth;
+        // moveSpeed = 1.5f;
+        // attackDamage = 10;
+        // attackSpeed = 1.8f;
+        // experiencePoints = 20;
     }
     protected override void Start()
     {

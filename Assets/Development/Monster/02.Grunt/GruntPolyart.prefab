@@ -116,13 +116,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStateType: 0
   ForceStateChange: 0
-  maxHealth: 0
+  maxHealth: 30
   currentHealth: 0
+  baseMoveSpeed: 0
   moveSpeed: 0
   attackDamage: 0
   attackSpeed: 0
   experiencePoints: 0
+  dropCoins: 0
+  dropGems: 0
   healthBar: {fileID: 6554840995310610955}
+  hitAudio: {fileID: 0}
 --- !u!95 &388476415
 Animator:
   serializedVersion: 7
@@ -1186,7 +1190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -10}
+  m_AnchoredPosition: {x: 0, y: -1}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6554840995310610955
