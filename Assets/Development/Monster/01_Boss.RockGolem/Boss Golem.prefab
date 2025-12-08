@@ -116,11 +116,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStateType: 0
   ForceStateChange: 0
-  maxHealth: 30
+  maxHealth: 1500
   currentHealth: 0
-  baseMoveSpeed: 1
+  baseMoveSpeed: 2
   moveSpeed: 0
-  attackDamage: 0
+  attackDamage: 50
   attackSpeed: 0
   experiencePoints: 0
   dropCoins: 200

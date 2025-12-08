@@ -832,8 +832,10 @@ MonoBehaviour:
   attackDamage: 4
   attackSpeed: 3
   experiencePoints: 10
+  dropCoins: 0
+  dropGems: 0
   healthBar: {fileID: 81283957339306811}
-  hitAudio: {fileID: 8300000, guid: 200dff54cc30a964cb0903e0ee9aea36, type: 3}
+  hitAudio: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
 --- !u!95 &7769598065701365474
 Animator:
   serializedVersion: 7

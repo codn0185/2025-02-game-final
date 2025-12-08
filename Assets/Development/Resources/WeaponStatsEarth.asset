@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754ea06ecc729786da0caa03fd2d8afe, type: 3}
   m_Name: WeaponStatsEarth
   m_EditorClassIdentifier: 
+  magicType: 0
   projectileSpeed: 30
   attack_speed: 20
   life_time: 10
-  damage: 10
+  damage: 1
   isKnockback: 1
   knockbackPower: 1
   isSlow: 0
