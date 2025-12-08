@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class _UIManager : MonoBehaviour
 {
-    public static UIManager instance;
+    public static _UIManager instance;
 
     // In Game UI
     public Text InGame_killCountText;

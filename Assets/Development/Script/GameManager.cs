@@ -67,13 +67,13 @@ public class GameManager : MonoBehaviour
         }
 
         play_time += Time.deltaTime;
-        UIManager.instance.UpdateTime(play_time);
+        // UIManager.instance.UpdateTime(play_time);
 
         round_time += Time.deltaTime;
         if (game_round >= 0 && game_round < Round.data.Count)
         {
             float remaining = Round.data[game_round].round_time - round_time;
-            UIManager.instance.UpdateRoundTimeText(remaining);
+            // UIManager.instance.UpdateRoundTimeText(remaining);
         }
 
         if (round_time >= Round.data[game_round].round_time)
@@ -120,13 +120,13 @@ public class GameManager : MonoBehaviour
                 Debug.Log("GameState.GAME_OVER");
                 gameOverUI.SetActive(true);
                 Time.timeScale = 0f;
-                UIManager.instance.SetGameOverUI(game_round, (int)play_time, kill_count);
+                // UIManager.instance.SetGameOverUI(game_round, (int)play_time, kill_count);
                 break;
             case GameState.GAME_CLEAR:
                 Debug.Log("GameState.GAME_CLEAR");
                 gameClearUI.SetActive(true);
                 Time.timeScale = 0f;
-                UIManager.instance.SetGameClearUI(game_round, (int)play_time, kill_count);
+                // UIManager.instance.SetGameClearUI(game_round, (int)play_time, kill_count);
                 break;
         }
     }
@@ -179,7 +179,8 @@ public class GameManager : MonoBehaviour
         }
 
         FillUpHP();
-        UIManager.instance.UpdateRoundText(game_round, Round.MAX_ROUND);
+        // CurrentRoundData = Round.data[game_round];
+        // UIManager.instance.UpdateRoundText(game_round, Round.MAX_ROUND);
     }
 
     public bool GetItem(string tag)
@@ -212,7 +213,7 @@ public class GameManager : MonoBehaviour
     public void DecreaseHP(int value = 1)
     {
         player_hp--;
-        UIManager.instance.UpdateHP(player_hp, max_player_hp);
+        // UIManager.instance.UpdateHP(player_hp, max_player_hp);
         if (player_hp == 0)
         {
             ChangeToGameOver();
@@ -222,18 +223,18 @@ public class GameManager : MonoBehaviour
     public void IncreaseHP(int value = 1)
     {
         player_hp = Math.Min(player_hp + value, max_player_hp);
-        UIManager.instance.UpdateHP(player_hp, max_player_hp);
+        // UIManager.instance.UpdateHP(player_hp, max_player_hp);
     }
 
     public void FillUpHP()
     {
         player_hp = max_player_hp;
-        UIManager.instance.UpdateHP(player_hp, max_player_hp);
+        // UIManager.instance.UpdateHP(player_hp, max_player_hp);
     }
 
     public void IncreaseKillCount(int count = 1)
     {
         kill_count += count;
-        UIManager.instance.UpdateKillCount(kill_count);
+        // UIManager.instance.UpdateKillCount(kill_count);
     }
 }

@@ -236,6 +236,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
         GameProgressManager.Instance.AddExperience(experiencePoints);
         GameProgressManager.Instance.AddCoins(dropCoins);
         GameProgressManager.Instance.AddGems(dropGems);
+        GameProgressManager.Instance.AddKillCount();
         Entities.Remove(this);
         moveSpeed = 0;
         Destroy(gameObject, DESTROY_DELAY);
