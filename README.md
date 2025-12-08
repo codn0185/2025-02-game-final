@@ -227,12 +227,13 @@ Then, it should be good to go!
 * [Pixabay/sound-effect](https://pixabay.com/ko/sound-effects/)
 * [Skeleton hit sound](https://pixabay.com/sound-effects/bone-break-sound-269658/)
 * [Slime hit SFX](https://pixabay.com/sound-effects/slimejump-6913/)
+* [BGM](https://pixabay.com/music/introoutro-game-setting-fantasy-142092/)
 
 ### UI Menu
 
 * [UI asset](https://assetstore.unity.com/packages/2d/gui/pixel-art-ui-essentials-329983#content)
 
-* BGM
+  + [Start Menu](https://fity.club/lists/suggestions/Fantasy-Pixel-Landscape-Large/)
   + Main Menu
   + Pause Menu
   + Game Over Menu

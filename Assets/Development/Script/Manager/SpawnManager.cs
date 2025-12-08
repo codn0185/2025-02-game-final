@@ -49,7 +49,7 @@ public class SpawnManager : Singleton<SpawnManager>
             float xPos = Random.Range(-4.0f, 4.0f);
             // float zPos = Random.Range(33.5f, 55.5f);
             Vector3 spawnPosition = new Vector3(xPos, 0.32f, 50f);
-            if (currentRound == 2 && roundSpawnCount < 1)
+            if (currentRound == 3 && roundSpawnCount < 1)
             {
                 Instantiate(bossPrefab, spawnPosition, Quaternion.Euler(0, 180, 0));
 

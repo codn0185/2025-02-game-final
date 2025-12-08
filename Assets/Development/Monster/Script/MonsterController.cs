@@ -263,7 +263,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
     {
         while (true)
         {
-            yield return new WaitForSeconds(attackSpeed);
+            yield return new WaitForSeconds(5f / attackSpeed);
             Attack();
         }
     }
