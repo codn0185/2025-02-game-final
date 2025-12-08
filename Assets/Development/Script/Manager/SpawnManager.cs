@@ -19,12 +19,7 @@ public class SpawnManager : Singleton<SpawnManager>
     protected override void Awake()
     {
         base.Awake();
-        if (stageSettings == null)
-        {
-            stageSettings = Resources.Load<StageSettingSO>("StageSettings" + currentStage);
-        }
-        SetStage(stageSettings);
-
+        SetStage(1, 1);
         StartCoroutine(Spawn_Monster_Coroutine());
         // StartCoroutine(Spawn_Item_Coroutine());
     }
@@ -94,13 +89,15 @@ public class SpawnManager : Singleton<SpawnManager>
         StartCoroutine(Spawn_Item_Coroutine());
     }
 
-    public void SetStage(StageSettingSO settings)
+    public void SetStage(int stage, int round)
     {
-        monsterPrefabs = settings.enemies;
-        bossPrefab = settings.boss;
-        enemyRatio = new int[][] { settings.enemyRatio1, settings.enemyRatio2, settings.enemyRatio3 };
-        totalEnemies = settings.totalEnemies[currentRound];
-        spawnRate = settings.spawnRatios[currentRound];
+        stageSettings = Resources.Load<StageSettingSO>("StageSettings" + stage);
+
+        monsterPrefabs = stageSettings.enemies;
+        bossPrefab = stageSettings.boss;
+        enemyRatio = new int[][] { stageSettings.enemyRatio1, stageSettings.enemyRatio2, stageSettings.enemyRatio3 };
+        totalEnemies = stageSettings.totalEnemies[round - 1];
+        spawnRate = stageSettings.spawnRatios[round - 1];
 
         spawnedEnemyRatio = new int[monsterPrefabs.Length];
     }
