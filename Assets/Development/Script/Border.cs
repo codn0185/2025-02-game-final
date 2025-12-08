@@ -6,7 +6,7 @@ public class Border : MonoBehaviour
 {
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -16,7 +16,6 @@ public class Border : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         switch (other.tag)
         {
             case "Enemy":

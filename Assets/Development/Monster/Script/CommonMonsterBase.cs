@@ -41,41 +41,7 @@ public abstract class CommonMonsterBase : MonsterController, IStoppable, IKnockb
         moveSpeed = baseMoveSpeed;
     }
 
-    public void ApplyChain(int chainCount, Bullet bullet, CommonMonsterBase avoid)
-    {
-        StartCoroutine(ChainCoroutine(chainCount, bullet, avoid));
-    }
 
-    IEnumerator ChainCoroutine(int chainCount, Bullet bullet, CommonMonsterBase avoid)
-    {
-        yield return new WaitForSeconds(0.1f);
-
-        Vector3 pos = transform.position;
-        CommonMonsterBase closestEnemy = this;
-        float closest = float.PositiveInfinity;
-
-        foreach (CommonMonsterBase enemy in Entities)
-        {
-            if (!ReferenceEquals(enemy, this) && !ReferenceEquals(avoid, enemy))
-            {
-                var dist = (pos - enemy.transform.position).sqrMagnitude;
-                if (dist < bullet.chainSize && dist < closest)
-                {
-                    closestEnemy = enemy;
-                    closest = dist;
-                }
-            }
-        }
-        if (!ReferenceEquals(closestEnemy, this))
-        {
-            closestEnemy.TakeDamage(bullet.damage);
-            Instantiate(bullet.hitParticle, transform.position, Quaternion.identity);
-
-            if (chainCount > 0)
-                closestEnemy.ApplyChain(chainCount - 1, bullet, this);
-        }
-
-    }
 
     new void OnTriggerEnter(Collider other)
     {
@@ -96,11 +62,6 @@ public abstract class CommonMonsterBase : MonsterController, IStoppable, IKnockb
         {
             ApplySlow(bullet.slowPower, bullet.slowDuration);
         }
-        if (bullet.isChain)
-        {
-            ApplyChain(bullet.chainCount - 1, bullet, this);
-        }
-
 
     }
 
