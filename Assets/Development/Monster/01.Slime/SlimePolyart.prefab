@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 2824980148479884264}
   - component: {fileID: 6039609623836652172}
   m_Layer: 0
-  m_Name: Slider
+  m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,9 +504,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8837900427658925046}
+  - component: {fileID: 7604913468982000412}
   - component: {fileID: 7486570062403082886}
   - component: {fileID: 3299136349000116459}
-  - component: {fileID: 7604913468982000412}
   - component: {fileID: 6360121816432386659}
   m_Layer: 0
   m_Name: SlimePolyart
@@ -533,6 +533,27 @@ Transform:
   - {fileID: 456735927419704690}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &7604913468982000412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7048984066602449132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4c65e7a1c7db34b818d3690a03099d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStateType: 0
+  ForceStateChange: 0
+  maxHealth: 0
+  currentHealth: 0
+  moveSpeed: 0
+  attackDamage: 0
+  attackSpeed: 0
+  experiencePoints: 0
+  healthBar: {fileID: 6039609623836652172}
 --- !u!95 &7486570062403082886
 Animator:
   serializedVersion: 7
@@ -576,19 +597,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &7604913468982000412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7048984066602449132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c4c65e7a1c7db34b818d3690a03099d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 6039609623836652172}
 --- !u!54 &6360121816432386659
 Rigidbody:
   m_ObjectHideFlags: 0

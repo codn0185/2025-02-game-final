@@ -1,21 +1,19 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Monster : CommonMonsterBase
+public class Lich : CommonMonsterBase
 {
-
     protected override void Awake()
     {
         base.Awake();
 
-        maxHealth = 30;
+        maxHealth = 500;
         currentHealth = maxHealth;
         moveSpeed = 2.0f;
-        attackDamage = 3;
-        attackSpeed = 1.5f;
-        experiencePoints = 2;
+        attackDamage = 20;
+        attackSpeed = 0.7f;
+        experiencePoints = 80;
     }
     protected override void Start()
     {

@@ -381,12 +381,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2411980292613625194}
-  - component: {fileID: 7458259793570958920}
   - component: {fileID: 3452737798529566505}
+  - component: {fileID: 7458259793570958920}
   - component: {fileID: 1187692734500030006}
   - component: {fileID: 3245913382246417793}
   m_Layer: 0
-  m_Name: Monster
+  m_Name: Skeleton
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -413,28 +413,6 @@ Transform:
   - {fileID: 6738731656837372461}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!95 &7458259793570958920
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945533208979129777}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6e1cc692053818b4aa1948ff5c95162e, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3452737798529566505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +425,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d638efcb74dd41bbb219556cd65185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStateType: 0
+  ForceStateChange: 0
+  maxHealth: 0
+  currentHealth: 0
+  moveSpeed: 0
+  attackDamage: 0
+  attackSpeed: 0
+  experiencePoints: 0
   healthBar: {fileID: 8713000739228160706}
+--- !u!95 &7458259793570958920
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945533208979129777}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a22858eb7ea109c4892773f38bdaf440, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!136 &1187692734500030006
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1117,7 +1125,7 @@ GameObject:
   - component: {fileID: 7569666763669466556}
   - component: {fileID: 8713000739228160706}
   m_Layer: 0
-  m_Name: Slider
+  m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1431,8 +1439,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6416942794964017604
 GameObject:
@@ -1853,7 +1861,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8245143672375398523
 CanvasRenderer:

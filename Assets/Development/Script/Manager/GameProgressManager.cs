@@ -40,6 +40,12 @@ public class GameProgressManager : Singleton<GameProgressManager>
         ChangeState(GameProgressState.Playing);
     }
 
+    // ========== 플레이어 정보 관리 ==========
+    public void AddExperience(int amount)
+    {
+        // 경험치 추가 로직 구현
+    }
+
     // ========== 스테이지 관리 ==========
     public void StartStage(int stage)
     {
