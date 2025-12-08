@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edaf5b1faadb27442a56deafc708e992, type: 3}
-  m_Name: Earth_Knockback
+  m_Name: Fire_ExplosionRadius
   m_EditorClassIdentifier: 
-  MagicType: 0
-  UpgradeType: 1
-  Name: Earth_Knockback
-  Description: (Earth) Knockback Power Upgrade
+  MagicType: 2
+  UpgradeType: 5
+  Name: Fire_ExplosionRadius
+  Description: (Fire) Explosion Radius Upgrade
   Icon: {fileID: 0}
   MaxLevel: 5
   IncreaseRatio: 20
