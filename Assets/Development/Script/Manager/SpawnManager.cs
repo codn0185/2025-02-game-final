@@ -101,10 +101,5 @@ public class SpawnManager : Singleton<SpawnManager>
 
         spawnedEnemyRatio = new int[monsterPrefabs.Length];
     }
-    
-    public void SetStage(int stageNumber)
-    {
-        StageSettingSO settings = Resources.Load<StageSettingSO>(StageSettings.GetStageFromNumber(stageNumber));
-        SetStage(settings);
-    }
+
 }

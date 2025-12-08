@@ -62,7 +62,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
         currentStage = stage;
         currentRound = 0;
         ChangeState(GameProgressState.Playing);
-        SpawnManager.Instance.SetStage(currentStage);
+        SpawnManager.Instance.SetStage(currentStage, currentRound);
     }
 
     public void CompleteStage()

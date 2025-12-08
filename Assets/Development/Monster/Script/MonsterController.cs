@@ -75,7 +75,8 @@ public abstract class MonsterController : Controller<MonsterFSM>
 
     protected virtual void LateUpdate()
     {
-        Rigidbody.MovePosition(transform.position + moveSpeed * Time.deltaTime * transform.forward);
+        if (StateMachine.CurrentState == StateMachine.MoveState)
+            Rigidbody.MovePosition(transform.position + moveSpeed * Time.deltaTime * transform.forward);
     }
 
     public void TakeDamage(int damage)
@@ -86,15 +87,16 @@ public abstract class MonsterController : Controller<MonsterFSM>
         UpdateHealthBar();
         healthBar.gameObject.SetActive(true);
         if (currentHealth <= 0)
-            if (ForceStateChange && currentStateType != StateMachine.CurrentState.StateType)
-            {
-                ChangeStateByType(currentStateType);
-                ForceStateChange = false;
-            }
-            else
-            {
-                currentStateType = StateMachine.CurrentState.StateType;
-            }
+            IsDead = true;
+        if (ForceStateChange && currentStateType != StateMachine.CurrentState.StateType)
+        {
+            ChangeStateByType(currentStateType);
+            ForceStateChange = false;
+        }
+        else
+        {
+            currentStateType = StateMachine.CurrentState.StateType;
+        }
     }
 
     // === Trigger Events ===
@@ -103,6 +105,26 @@ public abstract class MonsterController : Controller<MonsterFSM>
         if (other.CompareTag(Tag.AttackPoint))
         {
             IsReachedAttackPoint = true;
+        }
+        else if (other.CompareTag(Tag.Bullet))
+            OnHit(other);
+    }
+
+    protected void OnHit(Collider other)
+    {
+        if (other.CompareTag(Tag.Bullet))
+        {
+            if (IsDead)
+            {
+                return;
+            }
+
+            Bullet bullet = other.GetComponentInParent<Bullet>();
+
+            TakeDamage(bullet.damage);
+
+            bullet.OnHit();
+
         }
     }
 
@@ -203,10 +225,13 @@ public abstract class MonsterController : Controller<MonsterFSM>
     {
         GetComponent<Collider>().enabled = false;
         healthBar.gameObject.SetActive(false);
+        Animator.SetBool(MonsterAnimatorParameter.Dead, true);
+        SoundManager.instance.PlayAudio(hitAudio);
         GameProgressManager.Instance.AddExperience(experiencePoints);
         GameProgressManager.Instance.AddCoins(dropCoins);
         GameProgressManager.Instance.AddGems(dropGems);
         Entities.Remove(this);
+        moveSpeed = 0;
         Destroy(gameObject, DESTROY_DELAY);
     }
 

@@ -116,13 +116,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStateType: 0
   ForceStateChange: 0
-  maxHealth: 0
+  maxHealth: 30
   currentHealth: 0
+  baseMoveSpeed: 5
   moveSpeed: 0
   attackDamage: 0
   attackSpeed: 0
   experiencePoints: 0
   healthBar: {fileID: 1501444950016491633}
+  hitAudio: {fileID: 0}
   rockThrowInterval: 5
   rockThrowDuration: 1
   rockPrefab: {fileID: 1375754531036840, guid: 26d90779e9ce2684b944c700c90d0a68, type: 3}
