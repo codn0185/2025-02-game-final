@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edaf5b1faadb27442a56deafc708e992, type: 3}
-  m_Name: BaseHealth
+  m_Name: Earth_AttackSpeed
   m_EditorClassIdentifier: 
-  Type: 0
-  Name: Health Upgrade
-  Description: Increase Base Health
+  MagicType: 0
+  UpgradeType: 0
+  Name: Earth_AttackSpeed
+  Description: (Earth) Attack Speed Upgrade
   Icon: {fileID: 0}
   MaxLevel: 10
-  IncreaseRatio: 0.2
-  CostPerLevel: 64000000c80000002c01000090010000f401000058020000bc0200002003000084030000e8030000
+  IncreaseRatio: 10
+  CostPerLevel: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
