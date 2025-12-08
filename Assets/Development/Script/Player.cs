@@ -60,8 +60,9 @@ public class Player : MonoBehaviour
                 velocity.x = speed;
                 rb.velocity = velocity;
 
-                AnimatorChange("isLeft");
                 animator.SetBool("walk", true);
+                animator.SetBool("right", true);
+                animator.SetBool("left", false);
             }
             else if (distance > 0.1f)
             {
@@ -70,12 +71,15 @@ public class Player : MonoBehaviour
                 velocity.x = -speed;
                 rb.velocity = velocity;
 
-                AnimatorChange("isLeft");
+
                 animator.SetBool("walk", true);
+                animator.SetBool("right", true);
+                animator.SetBool("left", false);
             }
             else
             {
                 rb.velocity = Vector3.zero;
+
             }
         }
         if (Input.GetMouseButtonUp(0))
@@ -103,14 +107,13 @@ public class Player : MonoBehaviour
         }
 
         animator.SetBool("walk", false);
-        animator.SetBool("isLeft", false);
 
         animator.SetBool(temp, true);
     }
 
     void Attack()
     {
-        AnimatorChange("SHOOT");
+        AnimatorChange("attack");
 
         GameObject bullet = Instantiate(bulletPrefabs[attack_type], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z + 1.0f), Quaternion.identity);
 
