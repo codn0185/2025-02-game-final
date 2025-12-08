@@ -46,17 +46,32 @@ public class GameProgressManager : Singleton<GameProgressManager>
         // 경험치 추가 로직 구현
     }
 
+    public void AddCoins(int amount)
+    {
+        // 코인 추가 로직 구현
+    }
+
+    public void AddGems(int amount)
+    {
+        // 보석 추가 로직 구현
+    }
+
     // ========== 스테이지 관리 ==========
     public void StartStage(int stage)
     {
         currentStage = stage;
         currentRound = 0;
         ChangeState(GameProgressState.Playing);
+        SpawnManager.Instance.SetStage(currentStage);
     }
 
     public void CompleteStage()
     {
         SaveProgress();
+        if (currentStage < StageSettings.MaxStageNumber)
+            NextStage();
+        else
+            GameClear();
     }
 
     public void NextStage()

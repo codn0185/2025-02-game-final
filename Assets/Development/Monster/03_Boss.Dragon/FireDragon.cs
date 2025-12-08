@@ -9,7 +9,7 @@ public class FireDragon : BossMonsterBase
     [Header("Fire Dragon - Flame Breath Attack")]
     [SerializeField] private float flameAttackInterval = 5f; // 화염 브레스 공격 주기
     [SerializeField] private float attackDuration = 3f; // 공격 지속 시간
-    [SerializeField] private float headRotationSpeed = 45f; // 머리 회전 속도 (도/초)
+    // [SerializeField] private float headRotationSpeed = 45f; // 머리 회전 속도 (도/초)
     [SerializeField] private float rotationAngleRange = 60f; // 회전 각도 범위 (좌우)
     
     [Header("Projectile Settings")]

@@ -16,7 +16,7 @@ public class RockGolem : BossMonsterBase
     [SerializeField] private Transform handTransform; // 돌을 들고 던지는 손 위치
     
     [Header("Throw Parameters")]
-    [SerializeField] private float rockHoldDuration = 0.5f; // 손에 돌을 들고 있는 시간
+    // [SerializeField] private float rockHoldDuration = 0.5f; // 손에 돌을 들고 있는 시간
     [SerializeField] private float throwDistance = 10f; // 투척 거리
     [SerializeField] private float throwHeight = 5f; // 포물선 최대 높이
     [SerializeField] private float throwSpeed = 10f; // 투척 속도

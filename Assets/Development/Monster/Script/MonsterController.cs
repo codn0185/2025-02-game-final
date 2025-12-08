@@ -24,13 +24,15 @@ public abstract class MonsterController : Controller<MonsterFSM>
     [SerializeField] private bool ForceStateChange = false;
 
     [Header("Monster Stats")]
-    [SerializeField] public int maxHealth;
+    [SerializeField] protected int maxHealth;
     [SerializeField] protected int currentHealth;
-    public float baseMoveSpeed;
+    [SerializeField] protected float baseMoveSpeed;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected int attackDamage;
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected int experiencePoints;
+    [SerializeField] protected int dropCoins;
+    [SerializeField] protected int dropGems;
     [Header("UI")]
     // [SerializeField] private Slider healthBar;
     // === Private Fields ===
@@ -202,6 +204,8 @@ public abstract class MonsterController : Controller<MonsterFSM>
         GetComponent<Collider>().enabled = false;
         healthBar.gameObject.SetActive(false);
         GameProgressManager.Instance.AddExperience(experiencePoints);
+        GameProgressManager.Instance.AddCoins(dropCoins);
+        GameProgressManager.Instance.AddGems(dropGems);
         Entities.Remove(this);
         Destroy(gameObject, DESTROY_DELAY);
     }
