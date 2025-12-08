@@ -50,7 +50,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
     {
         // 코인 추가 로직 구현
     }
-    
+
     public void AddGems(int amount)
     {
         // 보석 추가 로직 구현
@@ -62,11 +62,16 @@ public class GameProgressManager : Singleton<GameProgressManager>
         currentStage = stage;
         currentRound = 0;
         ChangeState(GameProgressState.Playing);
+        SpawnManager.Instance.SetStage(currentStage);
     }
 
     public void CompleteStage()
     {
         SaveProgress();
+        if (currentStage < StageSettings.MaxStageNumber)
+            NextStage();
+        else
+            GameClear();
     }
 
     public void NextStage()
