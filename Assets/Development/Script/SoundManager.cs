@@ -39,4 +39,9 @@ public class SoundManager : MonoBehaviour
     {
         source.PlayOneShot(audios[(int)value]);
     }
+
+    public void PlayAudio(AudioClip clip)
+    {
+        source.PlayOneShot(clip);
+    }
 }

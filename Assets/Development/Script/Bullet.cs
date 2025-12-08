@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed;
-    public float life_time;
+    public float speed = 10;
+    public float life_time = 10;
     public int damage;
     public int hit_count;
     //Explosion
     public bool isExplosive = false;
     public float explosionSize = 3f;
-    private Vector3 explosionVector;
-
-    public float lingerDuration = 0.1f;
+    public Vector3 explosionVector;
+    public float lingerDuration = 0f;
     // Knockback
     public bool isKnockback = false;
     public float knockbackPower = 1;
@@ -23,11 +22,15 @@ public class Bullet : MonoBehaviour
     public float chainSize = 3;
     public int chainCount = 3;
     public GameObject hitParticle;
+    public float hitParticleLinger = 0.5f;
     public CapsuleCollider hitCollider;
+    public GameObject slowParticle;
+    public AudioClip shootSFX;
+    public AudioClip hitSFX;
 
-
-    void Start()
+    void Awake()
     {
+        SoundManager.instance.PlayAudio(shootSFX);
         if (isExplosive)
             explosionVector = new Vector3(explosionSize, explosionSize, explosionSize);
         Destroy(gameObject, life_time);
@@ -40,15 +43,16 @@ public class Bullet : MonoBehaviour
 
     public void OnHit()
     {
-        SoundManager.instance.AudioStart(SoundManager.AudioValue.Hit);
+        SoundManager.instance.PlayAudio(hitSFX);
         hit_count--;
-        Instantiate(hitParticle, transform.position, Quaternion.identity);
+        GameObject hitParticleInstance = Instantiate(hitParticle, transform.position, Quaternion.identity);
+        Destroy(hitParticleInstance, hitParticleLinger);
 
         if (isExplosive)
             hitCollider.transform.localScale = explosionVector;
 
         if (hit_count <= 0)
-            Destroy(gameObject);
+            Destroy(gameObject, lingerDuration);
 
     }
 

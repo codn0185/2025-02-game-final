@@ -1,25 +1,38 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     Rigidbody rb;
     Animator animator;
-    public float moveDistance;
+    public float moveDistance = 10;
     // Player
     public float speed;
+    public float attack_speed;
+    public int attack_type;
+    private Weapon weapon;
     // Spell effects
     public GameObject[] bulletPrefabs;
-    static float bullet_gap = 0.25f;
+    private static WeaponBaseSettingSO weaponBaseSettings;
+
+    // static float bullet_gap = 0.25f;
     // Particle
     public ParticleSystem LevelUp_Particle;
     // Audio
     public SoundManager soundManager;
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        if (weaponBaseSettings == null)
+        {
+            weaponBaseSettings = Resources.Load<WeaponBaseSettingSO>("WeaponBaseSettings");
+        }
+
+        weapon = weaponBaseSettings.weapons[attack_type];
+        attack_speed = weapon.attack_speed;
 
         StartCoroutine(Attack_Coroutine());
     }
@@ -94,15 +107,12 @@ public class Player : MonoBehaviour
     void Attack()
     {
         AnimatorChange("SHOOT");
-        SoundManager.instance.AudioStart(SoundManager.AudioValue.Shoot);
-        foreach (float posX in BulletPosX())
-        {
-            GameObject bullet = Instantiate(bulletPrefabs[GameManager.instance.attack_type], new Vector3(transform.position.x + posX, transform.position.y + 0.5f, transform.position.z + 1.0f), Quaternion.identity);
-            bullet.GetComponent<Bullet>().Initialize(
-                damage: GameManager.instance.bullet_damage,
-                hit_count: GameManager.instance.bullet_hit_count
-            );
-        }
+        // foreach (float posX in BulletPosX())
+        // {
+        GameObject bullet = Instantiate(bulletPrefabs[attack_type], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z + 1.0f), Quaternion.identity);
+
+        bullet.GetComponent<Bullet>().Initialize();
+        // }
     }
 
     IEnumerator Attack_Coroutine()
@@ -110,7 +120,7 @@ public class Player : MonoBehaviour
         if (GameManager.instance != null && GameManager.instance.CurrentState == GameState.GAME_PLAY)
         {
             Attack();
-            yield return new WaitForSeconds(5 / GameManager.instance.attack_speed);
+            yield return new WaitForSeconds(5.0f / attack_speed);
         }
         else
         {
@@ -119,19 +129,19 @@ public class Player : MonoBehaviour
         StartCoroutine(Attack_Coroutine());
     }
 
-    float[] BulletPosX()
-    {
-        int bullet_count = GameManager.instance.bullet_count;
-        float[] posX = new float[bullet_count];
-        float x = -bullet_gap * (bullet_count / 2);
-        for (int i = 0; i < bullet_count; i++)
-        {
-            posX[i] = x;
-            x += bullet_gap;
-        }
+    // float[] BulletPosX()
+    // {
+    //     int bullet_count = 1;
+    //     float[] posX = new float[bullet_count];
+    //     float x = -bullet_gap * (bullet_count / 2);
+    //     for (int i = 0; i < bullet_count; i++)
+    //     {
+    //         posX[i] = x;
+    //         x += bullet_gap;
+    //     }
 
-        return posX;
-    }
+    //     return posX;
+    // }
 
     private void LevelUp(GameObject gameObject)
     {

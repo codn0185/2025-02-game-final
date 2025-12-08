@@ -24,20 +24,23 @@ public abstract class MonsterController : Controller<MonsterFSM>
     [SerializeField] private bool ForceStateChange = false;
 
     [Header("Monster Stats")]
-    [SerializeField] protected int maxHealth;
+    [SerializeField] public int maxHealth;
     [SerializeField] protected int currentHealth;
+    public float baseMoveSpeed;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected int attackDamage;
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected int experiencePoints;
     [Header("UI")]
-    [SerializeField] private Slider healthBar;
+    // [SerializeField] private Slider healthBar;
     // === Private Fields ===
     private Coroutine attackCoroutine;
 
     // === Public Properties ===
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
+    public Slider healthBar;
+    public AudioClip hitAudio;
 
     public int CurrentHealth => currentHealth;
     public int MaxHealth => maxHealth;
@@ -54,6 +57,8 @@ public abstract class MonsterController : Controller<MonsterFSM>
         Animator = GetComponent<Animator>();
         healthBar.gameObject.SetActive(false);
         Entities.Add(this);
+        moveSpeed = baseMoveSpeed;
+        currentHealth = maxHealth;
     }
 
     protected virtual void Start()
@@ -68,15 +73,26 @@ public abstract class MonsterController : Controller<MonsterFSM>
 
     protected virtual void LateUpdate()
     {
-        if (ForceStateChange && currentStateType != StateMachine.CurrentState.StateType)
-        {
-            ChangeStateByType(currentStateType);
-            ForceStateChange = false;
-        }
-        else
-        {
-            currentStateType = StateMachine.CurrentState.StateType;
-        }
+        Rigidbody.MovePosition(transform.position + moveSpeed * Time.deltaTime * transform.forward);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (StateMachine.CurrentState == StateMachine.DeadState) return;
+        Animator.SetTrigger(MonsterAnimatorParameter.Hit);
+        currentHealth -= damage;
+        UpdateHealthBar();
+        healthBar.gameObject.SetActive(true);
+        if (currentHealth <= 0)
+            if (ForceStateChange && currentStateType != StateMachine.CurrentState.StateType)
+            {
+                ChangeStateByType(currentStateType);
+                ForceStateChange = false;
+            }
+            else
+            {
+                currentStateType = StateMachine.CurrentState.StateType;
+            }
     }
 
     // === Trigger Events ===
@@ -188,15 +204,6 @@ public abstract class MonsterController : Controller<MonsterFSM>
         GameProgressManager.Instance.AddExperience(experiencePoints);
         Entities.Remove(this);
         Destroy(gameObject, DESTROY_DELAY);
-    }
-
-    public virtual void TakeDamage(int damage)
-    {
-        if (StateMachine.CurrentState == StateMachine.DeadState) return;
-        Animator.SetTrigger(MonsterAnimatorParameter.Hit);
-        currentHealth = Mathf.Max(currentHealth - damage, 0);
-        IsDead = currentHealth <= 0;
-        UpdateHealthBar();
     }
 
     private void BeginAttackRoutine()

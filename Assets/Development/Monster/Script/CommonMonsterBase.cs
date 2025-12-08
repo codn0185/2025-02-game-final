@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class CommonMonsterBase : MonsterController, IStoppable, IKnockbackable, ISlowable
 {
+
+    private IEnumerator slowCoroutineTracker;
     public void ApplyStop(float duration)
     {
         StartCoroutine(StopCoroutine(duration));
@@ -24,18 +26,19 @@ public abstract class CommonMonsterBase : MonsterController, IStoppable, IKnockb
         transform.position += force * direction.normalized;
     }
 
-    public void ApplySlow(float slowPercentage, float duration)
+    public void ApplySlow(float slowPower, float duration)
     {
-        StartCoroutine(SlowCoroutine(slowPercentage, duration));
+        if (moveSpeed < baseMoveSpeed)
+            StopCoroutine(slowCoroutineTracker);
+        slowCoroutineTracker = SlowCoroutine(slowPower, duration);
+        StartCoroutine(slowCoroutineTracker);
     }
 
-    public IEnumerator SlowCoroutine(float slowPercentage, float duration)
+    public IEnumerator SlowCoroutine(float slowPower, float duration)
     {
-        float originalSpeed = moveSpeed;
-        moveSpeed = originalSpeed * (1f - Mathf.Clamp01(slowPercentage));
-        Debug.Log(moveSpeed);
+        moveSpeed = baseMoveSpeed * (0.3f + (1 / (2 + slowPower)));
         yield return new WaitForSeconds(duration);
-        moveSpeed = originalSpeed;
+        moveSpeed = baseMoveSpeed;
     }
 
     protected override void OnTriggerEnter(Collider other)
