@@ -8,14 +8,14 @@ SO로 각 메타 강화 정보 저장
 - UI 이미지
  */
 
-using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MetaUpgrade", menuName = "Settings/Meta Upgrade")]
 public class MetaUpgradeSO : ScriptableObject
 {
     [Header("Meta Upgrade Settings")]
-    public MetaUpgradeType Type;
+    public MagicType MagicType;
+    public MetaUpgradeType UpgradeType;
     public string Name;
     public string Description;
     public Sprite Icon;

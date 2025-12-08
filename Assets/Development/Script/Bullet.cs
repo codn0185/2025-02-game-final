@@ -70,6 +70,4 @@ public class Bullet : MonoBehaviour
         chainSize = weapon.chainSize;
         chainCount = weapon.chainCount;
     }
-
-
 }
