@@ -89,6 +89,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
         playerGems = gems;
         playerTotalKillCount = totalKillCount;
         this.playTime = playTime;
+        UIManager.Instance.UpdateInGameResources();
     }
 
     public void AddHealth(int amount)
@@ -116,13 +117,13 @@ public class GameProgressManager : Singleton<GameProgressManager>
     public void AddCoins(int amount)
     {
         playerCoins += amount;
-        // UIManager.Instance.UpdatePlayerCoins();
+        UIManager.Instance.UpdateInGameResources();
     }
 
     public void AddGems(int amount)
     {
         playerGems += amount;
-        // UIManager.Instance.UpdatePlayerGems();
+        UIManager.Instance.UpdateInGameResources();
     }
 
     public void AddKillCount(int amount)

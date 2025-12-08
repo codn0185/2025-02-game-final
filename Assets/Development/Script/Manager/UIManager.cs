@@ -10,6 +10,11 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject GameOverUI;
     [SerializeField] private GameObject GameClearUI;
 
+    // ========= Main UI Elements ==========
+    [Header("Main UI Elements")]
+    [SerializeField] private Text MainGoldText;
+    [SerializeField] private Text MainGemText;
+
     // =========== In-Game UI Elements ==========
     [Header("In-Game UI Elements")]
     [SerializeField] private Slider InGamePlayerHPSlider;
@@ -17,12 +22,25 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Text InGamePlayTimeText;
     [SerializeField] private Text InGameStageRoundText;
     [SerializeField] private Text InGameRoundLeftKillCountText;
-
+    [SerializeField] private Text InGameGoldText;
+    [SerializeField] private Text InGameGemText;
 
     // ========== Unity Lifecycle ==========
     protected override void Awake()
     {
         base.Awake();
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameProgressManager.Instance.CurrentState == GameProgressState.Playing)
+                GameProgressManager.Instance.PauseGame();
+            else if (GameProgressManager.Instance.CurrentState == GameProgressState.Paused)
+                GameProgressManager.Instance.ResumeGame();
+        }
+        
     }
 
     // ========== UI Show/Hide Methods ==========
@@ -54,6 +72,25 @@ public class UIManager : Singleton<UIManager>
     public void HideGameClearUI()
     {
         GameClearUI.SetActive(false);
+    }
+
+    // ========= Main UI Update Methods ==========
+    public void UpdateMainMenuResources()
+    {
+        MainGoldText.text = $"Gold: {MetaManager.Instance.CurrentGold}";
+        // MainGemText.text = $"Gem: {MetaManager.Instance.CurrentGem}";
+        
+        // 재화 변경 시 모든 업그레이드 슬롯 새로고침
+        RefreshAllUpgradeSlots();
+    }
+
+    public void RefreshAllUpgradeSlots()
+    {
+        UpgradeSlot[] allSlots = FindObjectsByType<UpgradeSlot>(FindObjectsSortMode.None);
+        foreach (var slot in allSlots)
+        {
+            slot.Refresh();
+        }
     }
 
     // ========= In-Game UI Update Methods ==========
@@ -109,5 +146,11 @@ public class UIManager : Singleton<UIManager>
     public void UpdateRoundLeftKillCount()
     {
         UpdateRoundLeftKillCount(SpawnManager.Instance.RoundLeftKillCount);
+    }
+
+    public void UpdateInGameResources()
+    {
+        InGameGoldText.text = $"Golds: {GameProgressManager.Instance.PlayerCoins}";
+        InGameGemText.text = $"Gems: {GameProgressManager.Instance.PlayerGems}";
     }
 }

@@ -136,19 +136,16 @@ public class UpgradeSlot : MonoBehaviour
         // 비용 및 버튼 상태
         if (currentLevel >= upgradeSO.MaxLevel)
         {
-            // 최대 레벨
+            // 최대 레벨 - 버튼 비활성화
             SetMaxLevel();
             SetButtonInteractable(false);
         }
         else
         {
-            // 업그레이드 가능
+            // 업그레이드 가능 - 재화 부족해도 버튼은 활성화
             int cost = upgradeSO.GetCost(currentLevel);
             SetCost(cost);
-            
-            // 재화가 충분한지 확인
-            bool canAfford = MetaManager.Instance.CurrentGold >= cost;
-            SetButtonInteractable(canAfford);
+            SetButtonInteractable(true);
         }
     }
 
@@ -169,12 +166,23 @@ public class UpgradeSlot : MonoBehaviour
             // UI 갱신
             UpdateUI();
             
-            // 다른 슬롯들도 업데이트 (재화가 변경되었으므로)
-            UpdateAllSlots();
+            // 재화 UI 업데이트 (다른 슬롯들도 함께 갱신됨)
+            MetaManager.Instance.UpdateResourcesUI();
         }
         else
         {
-            Debug.Log($"{upgradeSO.Name} 업그레이드 실패 (재화 부족 또는 최대 레벨)");
+            // 실패 원인 확인
+            int currentLevel = MetaManager.Instance.GetUpgradeLevel(upgradeType);
+            if (currentLevel >= upgradeSO.MaxLevel)
+            {
+                Debug.Log($"{upgradeSO.Name} 이미 최대 레벨입니다.");
+            }
+            else
+            {
+                int cost = upgradeSO.GetCost(currentLevel);
+                int currentGold = MetaManager.Instance.CurrentGold;
+                Debug.Log($"{upgradeSO.Name} 재화 부족! (필요: {cost}, 보유: {currentGold})");
+            }
         }
     }
 
