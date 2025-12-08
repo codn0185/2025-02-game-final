@@ -69,7 +69,7 @@ public class BackgroundManager : Singleton<BackgroundManager>
 
     private void SpawnBackground(GameObject backgroundPrefab)
     {
-        Debug.Log("Spawning Background: " + backgroundPrefab.name);
+        // Debug.Log("Spawning Background: " + backgroundPrefab.name);
         GameObject bg = Instantiate(backgroundPrefab, SpawnPosition, Quaternion.identity);
         SpawnedBackgroundGameObjects.Add(bg);
     }
@@ -93,7 +93,7 @@ public class BackgroundManager : Singleton<BackgroundManager>
                 Destroy(bg);
                 SpawnedBackgroundGameObjects.RemoveAt(i);
                 i--;
-                Debug.Log("Background Removed");
+                // Debug.Log("Background Removed");
             }
         }
     }

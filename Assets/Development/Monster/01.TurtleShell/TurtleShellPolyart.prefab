@@ -161,7 +161,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0170cef2045aecd4b83886a8ab540117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 50
+  baseMoveSpeed: 10
+  attackDamage: 5
+  attackSpeed: 3
+  experiencePoints: 20
   healthBar: {fileID: 4084465031825434974}
+  hitAudio: {fileID: 0}
 --- !u!54 &5626095740767675445
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 1945533208979129777, guid: 5cab26e4d9d4de786a84cf9032a920b7, type: 3}
-  - {fileID: 1945533208979129777, guid: 5cab26e4d9d4de786a84cf9032a920b7, type: 3}
-  - {fileID: 1945533208979129777, guid: 5cab26e4d9d4de786a84cf9032a920b7, type: 3}
-  totalEnemies: 320000004600000064000000
-  enemyRatio1: 
-  enemyRatio2: 
-  enemyRatio3: 
+  - {fileID: 7048984066602449132, guid: 5844b9969e647804e82cf1b62269d0c1, type: 3}
+  - {fileID: 734889237951171335, guid: e5ae2d485f5784b4fa0d11bc1117b941, type: 3}
+  totalEnemies: 0a0000004600000064000000
+  enemyRatio1: 460000001e00000000000000
+  enemyRatio2: 3c0000001e0000000a000000
+  enemyRatio3: 320000001e00000014000000

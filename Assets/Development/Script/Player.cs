@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     Rigidbody rb;
     Animator animator;
-    public float moveDistance;
+    public float moveDistance = 10;
     // Player
     public float speed;
     // Spell effects
@@ -94,14 +94,10 @@ public class Player : MonoBehaviour
     void Attack()
     {
         AnimatorChange("SHOOT");
-        SoundManager.instance.AudioStart(SoundManager.AudioValue.Shoot);
         foreach (float posX in BulletPosX())
         {
             GameObject bullet = Instantiate(bulletPrefabs[GameManager.instance.attack_type], new Vector3(transform.position.x + posX, transform.position.y + 0.5f, transform.position.z + 1.0f), Quaternion.identity);
-            bullet.GetComponent<Bullet>().Initialize(
-                damage: GameManager.instance.bullet_damage,
-                hit_count: GameManager.instance.bullet_hit_count
-            );
+            bullet.GetComponent<Bullet>().Initialize();
         }
     }
 
@@ -121,7 +117,7 @@ public class Player : MonoBehaviour
 
     float[] BulletPosX()
     {
-        int bullet_count = GameManager.instance.bullet_count;
+        int bullet_count = 1;
         float[] posX = new float[bullet_count];
         float x = -bullet_gap * (bullet_count / 2);
         for (int i = 0; i < bullet_count; i++)

@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 1187692734500030006}
   - component: {fileID: 3245913382246417793}
   m_Layer: 0
-  m_Name: Monster
+  m_Name: Skeleton
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -453,6 +453,7 @@ MonoBehaviour:
   attackSpeed: 1
   experiencePoints: 1
   healthBar: {fileID: 8713000739228160706}
+  hitAudio: {fileID: 8300000, guid: 9644632a7ebd9710da79dd5a2c8ad3e6, type: 3}
 --- !u!136 &1187692734500030006
 CapsuleCollider:
   m_ObjectHideFlags: 0

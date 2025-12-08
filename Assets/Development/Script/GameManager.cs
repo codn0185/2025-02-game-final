@@ -33,9 +33,9 @@ public class GameManager : MonoBehaviour
     // How many times player attacks per 5 seconds
     public int attack_speed = 5;
     public int attack_type;
-    public int bullet_damage;
-    public int bullet_count;
-    public int bullet_hit_count = 1;
+    // public int bullet_damage;
+    // public int bullet_count;
+    // public int bullet_hit_count = 1;
 
     // 플레이 데이터
     float play_time = 0f;
@@ -196,16 +196,16 @@ public class GameManager : MonoBehaviour
                 // }
                 return true;
             case ItemManager.ATK_Count.tag:
-                if (bullet_count < MAX_BULLET_COUNT)
-                {
-                    bullet_count++;
-                }
+                // if (bullet_count < MAX_BULLET_COUNT)
+                // {
+                //     bullet_count++;
+                // }
                 return true;
-            case ItemManager.ATK_Penetration.tag:
-                bullet_hit_count++;
-                return true;
+            // case ItemManager.ATK_Penetration.tag:
+            //     bullet_hit_count++;
+            //     return true;
             case ItemManager.ATK_Damage.tag:
-                bullet_damage++;
+                // bullet_damage++;
                 return true;
         }
         return false;

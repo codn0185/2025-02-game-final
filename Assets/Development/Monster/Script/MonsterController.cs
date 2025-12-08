@@ -22,6 +22,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
     public Slider healthBar;
+    public AudioClip hitAudio;
 
     protected virtual void Awake()
     {
@@ -59,6 +60,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
     public void Die()
     {
         GetComponent<Collider>().enabled = false;
+        SoundManager.instance.PlayAudio(hitAudio);
         healthBar.gameObject.SetActive(false);
         // GameManager.instance.AddExperience(experiencePoints);
         Destroy(gameObject, DESTROY_DELAY);

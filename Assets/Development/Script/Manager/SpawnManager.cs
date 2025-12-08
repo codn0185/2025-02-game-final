@@ -1,27 +1,30 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : Singleton<SpawnManager>
 {
-    public static SpawnManager instance;
-    public int[] enemyRatio;
+    [SerializeField] public StageSettingSO stageSettings;
+    private static StageSettingSO Settings => Instance.stageSettings;
+    private int[] enemyRatio = { 40, 30, 30 };
+    private int totalEnemies = 50;
     int[] spawnedEnemies;
     int enemyCount = 0;
-    public GameObject[] monsterPrefabs;
+    private GameObject[] monsterPrefabs;
     public GameObject[] itemPrefabs;
+    public GameObject spawnPortal;
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        if (stageSettings == null)
+        {
+            stageSettings = Resources.Load<StageSettingSO>("Stage1Settings");
+        }
+        monsterPrefabs = Settings.enemies;
+        enemyRatio = Settings.enemyRatio1;
+        totalEnemies = Settings.totalEnemies[0];
+
         spawnedEnemies = new int[monsterPrefabs.Length];
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(this);
-        }
 
         StartCoroutine(Spawn_Monster_Coroutine());
         // StartCoroutine(Spawn_Item_Coroutine());
@@ -35,12 +38,12 @@ public class SpawnManager : MonoBehaviour
     {
         // while (true)
         // {
-        //     if (GameManager.instance.CurrentState != GameState.GAME_PLAY)
+        //     if (GameManager.Instance.CurrentState != GameState.GAME_PLAY)
         //     {
         //         continue;
         //     }
 
-        //     Round.RoundData rd = GameManager.instance.CurrentRoundData;
+        //     Round.RoundData rd = GameManager.Instance.CurrentRoundData;
         //     if (rd != null && rd.round >= 1)
         //     {
         //         float xPos = Random.Range(-4.0f, 4.0f);
@@ -56,12 +59,15 @@ public class SpawnManager : MonoBehaviour
         //     }
         // }
 
-        if (GameManager.instance != null && GameManager.instance.CurrentState == GameState.GAME_PLAY)
+        if (GameManager.instance != null && GameManager.instance.CurrentState == GameState.GAME_PLAY && totalEnemies > enemyCount)
         {
+            if (!spawnPortal.activeSelf)
+                spawnPortal.SetActive(true);
+
             Round.RoundData rd = GameManager.instance.CurrentRoundData;
             float xPos = Random.Range(-4.0f, 4.0f);
-            float zPos = Random.Range(33.5f, 55.5f);
-            Vector3 spawnPosition = new Vector3(xPos, 0.32f, zPos);
+            // float zPos = Random.Range(33.5f, 55.5f);
+            Vector3 spawnPosition = new Vector3(xPos, 0.32f, 50f);
             if (enemyCount % 10 > 3)
             {
 
@@ -78,11 +84,13 @@ public class SpawnManager : MonoBehaviour
             else
                 Instantiate(monsterPrefabs[Random.Range(0, monsterPrefabs.Length)], spawnPosition, Quaternion.Euler(0, 180, 0));
 
+            enemyCount++;
             float wait = Mathf.Max(0.01f, Random.Range(1f, 1.5f) / rd.mob_spawn_rate);
             yield return new WaitForSeconds(wait);
         }
         else
         {
+            spawnPortal.SetActive(false);
             yield return new WaitForSeconds(1f);
         }
         StartCoroutine(Spawn_Monster_Coroutine());

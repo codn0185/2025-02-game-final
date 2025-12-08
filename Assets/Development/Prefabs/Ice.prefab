@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.17999999, y: 0.17999999, z: 0.17999999}
+  m_LocalScale: {x: 0.17999999, y: 0.17999996, z: 0.17999996}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1594778784782016196}
@@ -136,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 7597626028396165844}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.33, z: -1.57}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -156,9 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7225c8540aa33f1479963c83706ad8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  life_time: 0
-  damage: 0
+  speed: 15
+  life_time: 10
+  damage: 3
   hit_count: 1
   isExplosive: 0
   explosionSize: 3
@@ -171,8 +171,9 @@ MonoBehaviour:
   isChain: 0
   chainSize: 3
   chainCount: 3
-  hitParticle: {fileID: 1399709731545717304, guid: 50dddc66255811040a6e27a648a22bc4, type: 3}
+  hitParticle: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
   hitCollider: {fileID: 0}
+  slowParticle: {fileID: 161766660727748596, guid: 05ce920d629922a4eb4795ef7494ce5c, type: 3}
 --- !u!96 &7628139686343266208
 TrailRenderer:
   serializedVersion: 3
