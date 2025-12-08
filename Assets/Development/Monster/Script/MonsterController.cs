@@ -125,6 +125,11 @@ public abstract class MonsterController : Controller<MonsterFSM>
 
             bullet.OnHit();
 
+            if (bullet.isChain)
+            {
+                ApplyChain(bullet.chainCount - 1, bullet, this);
+            }
+
         }
     }
 
@@ -290,5 +295,41 @@ public abstract class MonsterController : Controller<MonsterFSM>
         };
 
         StateMachine.ChangeState(targetState);
+    }
+
+    public void ApplyChain(int chainCount, Bullet bullet, MonsterController avoid)
+    {
+        StartCoroutine(ChainCoroutine(chainCount, bullet, avoid));
+    }
+
+    IEnumerator ChainCoroutine(int chainCount, Bullet bullet, MonsterController avoid)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        Vector3 pos = transform.position;
+        MonsterController closestEnemy = this;
+        float closest = float.PositiveInfinity;
+
+        foreach (MonsterController enemy in Entities)
+        {
+            if (!ReferenceEquals(enemy, this) && !ReferenceEquals(avoid, enemy))
+            {
+                var dist = (pos - enemy.transform.position).sqrMagnitude;
+                if (dist < bullet.chainSize && dist < closest)
+                {
+                    closestEnemy = enemy;
+                    closest = dist;
+                }
+            }
+        }
+        if (!ReferenceEquals(closestEnemy, this))
+        {
+            closestEnemy.TakeDamage(bullet.damage);
+            Instantiate(bullet.hitParticle, transform.position, Quaternion.identity);
+
+            if (chainCount > 0)
+                closestEnemy.ApplyChain(chainCount - 1, bullet, this);
+        }
+
     }
 }

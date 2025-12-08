@@ -116,13 +116,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStateType: 0
   ForceStateChange: 0
-  maxHealth: 30
+  maxHealth: 1500
   currentHealth: 0
   baseMoveSpeed: 5
   moveSpeed: 0
   attackDamage: 0
   attackSpeed: 0
   experiencePoints: 0
+  dropCoins: 0
+  dropGems: 0
   healthBar: {fileID: 1501444950016491633}
   hitAudio: {fileID: 0}
   rockThrowInterval: 5
@@ -130,7 +132,6 @@ MonoBehaviour:
   rockPrefab: {fileID: 1375754531036840, guid: 26d90779e9ce2684b944c700c90d0a68, type: 3}
   miniGolemPrefab: {fileID: 1077356408, guid: a6a62e62e09fe6b4cb4b4ea8b374a675, type: 3}
   handTransform: {fileID: 4818361460809012}
-  rockHoldDuration: 0.5
   throwDistance: 10
   throwHeight: 5
   throwSpeed: 10
