@@ -9,21 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd19b3fd7a7c881f1a336be8bd77c0c6, type: 3}
-  m_Name: WeaponBaseLightning
-  m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  projectileSpeed: 15
-  attack_speed: 5
+  m_Script: {fileID: 11500000, guid: 754ea06ecc729786da0caa03fd2d8afe, type: 3}
+  m_Name: WeaponStatsIce
+  m_EditorClassIdentifier: 
+  projectileSpeed: 25
+  attack_speed: 15
   life_time: 10
-  damage: 10
+  damage: 15
   isKnockback: 0
   knockbackPower: 1
-  isSlow: 0
-  slowPower: 1
+  isSlow: 1
+  slowPower: 2
   slowDuration: 1
   isExplosive: 0
   explosionSize: 3
   lingerDuration: 0
-  isChain: 1
-  chainSize: 10
+  isChain: 0
+  chainSize: 3
   chainCount: 3

@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public float speed;
     public float attack_speed;
     public int attack_type;
-    private Weapon weapon;
+    private WeaponStats weapon;
     // Spell effects
     public GameObject[] bulletPrefabs;
     private static WeaponBaseSettingSO weaponBaseSettings;
@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     // Particle
     public ParticleSystem LevelUp_Particle;
     // Audio
-    public SoundManager soundManager;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -58,7 +57,8 @@ public class Player : MonoBehaviour
                 velocity.x = speed;
                 rb.velocity = velocity;
 
-                AnimatorChange("RUN");
+                AnimatorChange("isLeft");
+                animator.SetBool("walk", true);
             }
             else if (distance > 0.1f)
             {
@@ -67,7 +67,8 @@ public class Player : MonoBehaviour
                 velocity.x = -speed;
                 rb.velocity = velocity;
 
-                AnimatorChange("RUN");
+                AnimatorChange("isLeft");
+                animator.SetBool("walk", true);
             }
             else
             {
@@ -98,8 +99,8 @@ public class Player : MonoBehaviour
             return;
         }
 
-        animator.SetBool("IDLE", false);
-        animator.SetBool("RUN", false);
+        animator.SetBool("walk", false);
+        animator.SetBool("isLeft", false);
 
         animator.SetBool(temp, true);
     }

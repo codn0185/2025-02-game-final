@@ -103,7 +103,7 @@ public class UIManager : Singleton<UIManager>
 
     public void UpdateRoundLeftKillCount(int leftKillCount)
     {
-        InGameRoundLeftKillCountText.text = $"Left Kills: {leftKillCount}";
+        InGameRoundLeftKillCountText.text = $"Kills remaining: {leftKillCount}";
     }
 
     public void UpdateRoundLeftKillCount()

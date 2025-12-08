@@ -128,7 +128,6 @@ public class GameProgressManager : Singleton<GameProgressManager>
     public void AddKillCount(int amount)
     {
         playerTotalKillCount += amount;
-        SpawnManager.Instance.AddRoundKillCount(amount);
         UIManager.Instance.UpdateKillCount();
         UIManager.Instance.UpdateRoundLeftKillCount();
     }

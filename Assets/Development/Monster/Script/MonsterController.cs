@@ -223,7 +223,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
     protected virtual void Attack()
     {
         Animator.SetTrigger(MonsterAnimatorParameter.Attack.ToString());
-        // GameProgressManager.Instance.DealDamageToPlayer(attackDamage);
+        GameProgressManager.Instance.TakeDamage(attackDamage);
     }
 
     protected virtual void Die()
@@ -263,7 +263,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
     {
         while (true)
         {
-            yield return new WaitForSeconds(attackSpeed);
+            yield return new WaitForSeconds(5f / attackSpeed);
             Attack();
         }
     }
