@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         if (weaponBaseSettings == null)
         {
-            weaponBaseSettings = Resources.Load<WeaponBaseSettingSO>("WeaponBaseSettings");
+            weaponBaseSettings = Resources.Load<WeaponBaseSettingSO>("WeaponBase");
         }
 
         weapon = weaponBaseSettings.weapons[attack_type];
@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
         // {
         GameObject bullet = Instantiate(bulletPrefabs[attack_type], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z + 1.0f), Quaternion.identity);
 
-        bullet.GetComponent<Bullet>().Initialize();
+        bullet.GetComponent<Bullet>().Initialize(weapon);
         // }
     }
 
@@ -148,5 +148,10 @@ public class Player : MonoBehaviour
         LevelUp_Particle.Play();
         SoundManager.instance.AudioStart(SoundManager.AudioValue.Get);
         Destroy(gameObject);
+    }
+
+    public void SetAttackType(int type)
+    {
+        attack_type = type;
     }
 }

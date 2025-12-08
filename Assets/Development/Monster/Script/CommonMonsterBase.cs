@@ -41,14 +41,6 @@ public abstract class CommonMonsterBase : MonsterController, IStoppable, IKnockb
         moveSpeed = baseMoveSpeed;
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-        if (other.CompareTag(Tag.Bullet))
-            OnHit(other);
-
-    }
-
     public void ApplyChain(int chainCount, Bullet bullet, CommonMonsterBase avoid)
     {
         StartCoroutine(ChainCoroutine(chainCount, bullet, avoid));
@@ -85,35 +77,31 @@ public abstract class CommonMonsterBase : MonsterController, IStoppable, IKnockb
 
     }
 
-
-    void OnHit(Collider other)
+    new void OnTriggerEnter(Collider other)
     {
+        base.OnTriggerEnter(other);
         if (other.CompareTag(Tag.Bullet))
-        {
-            if (IsDead)
-            {
-                return;
-            }
-
-            Bullet bullet = other.GetComponentInParent<Bullet>();
-
-            TakeDamage(bullet.damage);
-
-            if (bullet.isKnockback)
-            {
-                transform.position += bullet.knockbackPower * -transform.forward;
-            }
-            if (bullet.isSlow)
-            {
-                ApplySlow(bullet.slowPower, bullet.slowDuration);
-            }
-            if (bullet.isChain)
-            {
-                ApplyChain(bullet.chainCount - 1, bullet, this);
-            }
-
-            bullet.OnHit();
-
-        }
+            OnHit(other);
     }
+
+    new void OnHit(Collider other)
+    {
+        Bullet bullet = other.GetComponentInParent<Bullet>();
+
+        if (bullet.isKnockback)
+        {
+            transform.position += bullet.knockbackPower * -transform.forward;
+        }
+        if (bullet.isSlow)
+        {
+            ApplySlow(bullet.slowPower, bullet.slowDuration);
+        }
+        if (bullet.isChain)
+        {
+            ApplyChain(bullet.chainCount - 1, bullet, this);
+        }
+
+
+    }
+
 }

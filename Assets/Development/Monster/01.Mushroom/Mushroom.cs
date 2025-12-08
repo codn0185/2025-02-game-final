@@ -10,12 +10,12 @@ public class Mushroom : CommonMonsterBase
     {
         base.Awake();
 
-        maxHealth = 10;
-        currentHealth = maxHealth;
-        moveSpeed = 3.0f;
-        attackDamage = 1;
-        attackSpeed = 0.8f;
-        experiencePoints = 1;
+        // maxHealth = 10;
+        // currentHealth = maxHealth;
+        // moveSpeed = 3.0f;
+        // attackDamage = 1;
+        // attackSpeed = 0.8f;
+        // experiencePoints = 1;
     }
     protected override void Start()
     {

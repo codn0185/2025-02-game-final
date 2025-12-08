@@ -15,8 +15,6 @@ public class Weapon : ScriptableObject
     public float attack_speed = 10;
     public float life_time = 10;
     public int damage;
-    public int hit_count;
-    // Knockback
     public bool isKnockback = false;
     public float knockbackPower = 1;
     // Slow

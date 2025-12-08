@@ -49,7 +49,7 @@ public class MonsterIdleState : MonsterState
         monster.OnExitIdle();
     }
 }
-    
+
 public class MonsterMoveState : MonsterState
 {
     public MonsterMoveState(MonsterController monster) : base(monster)
