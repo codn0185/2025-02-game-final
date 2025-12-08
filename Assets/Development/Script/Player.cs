@@ -31,10 +31,10 @@ public class Player : MonoBehaviour
         }
 
         weapon = weaponBaseSettings.weapons[attack_type];
-        
+
         // 공격 속도 업그레이드 적용
         attack_speed = weapon.attack_speed;
-        ApplyAttackSpeedUpgrade();
+
 
         StartCoroutine(Attack_Coroutine());
     }
@@ -111,18 +111,18 @@ public class Player : MonoBehaviour
     void Attack()
     {
         AnimatorChange("SHOOT");
-        
+
         GameObject bullet = Instantiate(bulletPrefabs[attack_type], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z + 1.0f), Quaternion.identity);
 
         // 업그레이드가 적용된 무기 데이터 생성
-        Weapon upgradedWeapon = ApplyUpgradesToWeapon(weapon);
-        bullet.GetComponent<Bullet>().Initialize(upgradedWeapon);
+        WeaponStats upgradedWeaponStats = ApplyUpgradesToWeaponStats(weapon);
+        bullet.GetComponent<Bullet>().Initialize(upgradedWeaponStats);
     }
 
     /// <summary>
     /// 공격 속도 업그레이드 적용
     /// </summary>
-    private void ApplyAttackSpeedUpgrade()
+    public void ApplyAttackSpeedUpgrade()
     {
         switch (weapon.magicType)
         {
@@ -132,37 +132,37 @@ public class Player : MonoBehaviour
             case MagicType.Ice:
                 attack_speed *= MetaManager.Instance.GetUpgradeMultiplier(MetaUpgradeType.Ice_AttackSpeed);
                 break;
-            // Fire와 Lightning은 공속 업그레이드 없음
+                // Fire와 Lightning은 공속 업그레이드 없음
         }
     }
 
     /// <summary>
     /// 무기 데이터에 업그레이드 적용
     /// </summary>
-    private Weapon ApplyUpgradesToWeapon(Weapon baseWeapon)
+    private WeaponStats ApplyUpgradesToWeaponStats(WeaponStats baseWeaponStats)
     {
         // 원본 데이터를 복사하여 수정 (원본 SO 보존)
-        Weapon upgraded = Instantiate(baseWeapon);
-        
-        switch (baseWeapon.magicType)
+        WeaponStats upgraded = Instantiate(baseWeaponStats);
+
+        switch (weapon.magicType)
         {
             case MagicType.Earth:
                 // 넉백 파워 증가
                 upgraded.knockbackPower *= MetaManager.Instance.GetUpgradeMultiplier(MetaUpgradeType.Earth_Knockback);
                 break;
-                
+
             case MagicType.Ice:
                 // 감속 효과 증가
                 upgraded.slowPower = Mathf.RoundToInt(upgraded.slowPower * MetaManager.Instance.GetUpgradeMultiplier(MetaUpgradeType.Ice_SlowIntensity));
                 break;
-                
+
             case MagicType.Fire:
                 // 공격력 증가
                 upgraded.damage = Mathf.RoundToInt(upgraded.damage * MetaManager.Instance.GetUpgradeMultiplier(MetaUpgradeType.Fire_AttackPower));
                 // 폭발 범위 증가
                 upgraded.explosionSize *= MetaManager.Instance.GetUpgradeMultiplier(MetaUpgradeType.Fire_ExplosionRadius);
                 break;
-                
+
             case MagicType.Lighting:
                 // 공격력 증가
                 upgraded.damage = Mathf.RoundToInt(upgraded.damage * MetaManager.Instance.GetUpgradeMultiplier(MetaUpgradeType.Lightning_AttackPower));
@@ -170,7 +170,7 @@ public class Player : MonoBehaviour
                 upgraded.chainCount = Mathf.RoundToInt(upgraded.chainCount * MetaManager.Instance.GetUpgradeMultiplier(MetaUpgradeType.Lightning_ChainCount));
                 break;
         }
-        
+
         return upgraded;
     }
 

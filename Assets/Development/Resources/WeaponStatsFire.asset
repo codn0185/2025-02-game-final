@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754ea06ecc729786da0caa03fd2d8afe, type: 3}
   m_Name: WeaponStatsFire
   m_EditorClassIdentifier: 
+  magicType: 2
   projectileSpeed: 15
   attack_speed: 5
   life_time: 10
