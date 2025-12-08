@@ -29,33 +29,113 @@ public class GameProgressManager : Singleton<GameProgressManager>
     public int CurrentStage => currentStage;
     public int CurrentRound => currentRound;
 
+    // ========== 플레이어 정보 ==========
+    [SerializeField] private int playerMaxHealth;
+    [SerializeField] private int playerCurrentHealth;
+    [SerializeField] private int playerLevel;
+    [SerializeField] private int playerExperience;
+    [SerializeField] private int playerCoins;
+    [SerializeField] private int playerGems;
+    [SerializeField] private int playerTotalKillCount;
+    [SerializeField] private float playTime;
+
+    // ========= 플레이어 정보 접근자 ==========
+    public int PlayerMaxHealth => playerMaxHealth;
+    public int PlayerCurrentHealth => playerCurrentHealth;
+    public int PlayerLevel => playerLevel;
+    public int PlayerExperience => playerExperience;
+    public int PlayerCoins => playerCoins;
+    public int PlayerGems => playerGems;
+    public int PlayerTotalKillCount => playerTotalKillCount;
+    public float PlayTime => playTime;
+
     // ========== Unity Lifecycle ==========
     protected override void Awake()
     {
         base.Awake();
-        
+
         ChangeState(GameProgressState.Idle);
     }
 
     void Start()
     {
         StartStage(1);
+        InitPlayerStats(1000); // 임시 체력 초기화
+    }
+
+    void Update()
+    {
+        if (currentState == GameProgressState.Playing)
+        {
+            playTime += Time.deltaTime;
+            UIManager.Instance.UpdatePlayTime();
+        }
     }
 
     // ========== 플레이어 정보 관리 ==========
+
+    public void InitPlayerStats(int health)
+    {
+        SetPlayerStats(health, 0, 0, 0, 0, 0, 0f);
+    }
+
+    public void SetPlayerStats(int maxHealth, int level, int experience, int coins, int gems, int totalKillCount, float playTime)
+    {
+        playerMaxHealth = maxHealth;
+        playerCurrentHealth = maxHealth;
+        playerLevel = level;
+        playerExperience = experience;
+        playerCoins = coins;
+        playerGems = gems;
+        playerTotalKillCount = totalKillCount;
+        this.playTime = playTime;
+    }
+
+    public void AddHealth(int amount)
+    {
+        playerCurrentHealth = Mathf.Min(playerCurrentHealth + amount, playerMaxHealth);
+        UIManager.Instance.UpdatePlayerHP();
+    }
+
+    public void TakeDamage(int amount)
+    {
+        playerCurrentHealth = Mathf.Max(playerCurrentHealth - amount, 0);
+        UIManager.Instance.UpdatePlayerHP();
+        if (playerCurrentHealth <= 0)
+        {
+            GameOver();
+        }
+    }
+
     public void AddExperience(int amount)
     {
-        // 경험치 추가 로직 구현
+        playerExperience += amount;
+        // UIManager.Instance.UpdatePlayerExperience();
     }
 
     public void AddCoins(int amount)
     {
-        // 코인 추가 로직 구현
+        playerCoins += amount;
+        // UIManager.Instance.UpdatePlayerCoins();
     }
 
     public void AddGems(int amount)
     {
-        // 보석 추가 로직 구현
+        playerGems += amount;
+        // UIManager.Instance.UpdatePlayerGems();
+    }
+
+    public void AddKillCount(int amount)
+    {
+        playerTotalKillCount += amount;
+        SpawnManager.Instance.AddRoundKillCount(amount);
+        UIManager.Instance.UpdateKillCount();
+        UIManager.Instance.UpdateRoundLeftKillCount();
+    }
+
+    public void AddKillCount()
+    {
+        AddKillCount(1);
     }
 
     // ========== 스테이지 관리 ==========
@@ -66,6 +146,8 @@ public class GameProgressManager : Singleton<GameProgressManager>
         SpawnManager.Instance.SetStage(currentStage);
         currentRound = 0;
         NextRound();
+
+        UIManager.Instance.UpdateStageRound();
     }
 
     public void CompleteStage()
@@ -88,6 +170,9 @@ public class GameProgressManager : Singleton<GameProgressManager>
         ChangeState(GameProgressState.Playing);
         currentRound = round;
         SpawnManager.Instance.SetRound(currentRound);
+
+        UIManager.Instance.UpdateStageRound();
+        UIManager.Instance.UpdateRoundLeftKillCount();
     }
 
     public void CompleteRound()
@@ -231,31 +316,31 @@ public class GameProgressManager : Singleton<GameProgressManager>
     // ========== UI 관리 ==========
     protected void ShowPauseUI()
     {
-        //
+        UIManager.Instance.ShowPauseUI();
     }
 
     protected void HidePauseUI()
     {
-        //
+        UIManager.Instance.HidePauseUI();
     }
 
     protected void ShowGameOverUI()
     {
-        //
+        UIManager.Instance.ShowGameOverUI();
     }
 
     protected void HideGameOverUI()
     {
-        //
+        UIManager.Instance.HideGameOverUI();
     }
 
     protected void ShowGameClearUI()
     {
-        //
+        UIManager.Instance.ShowGameClearUI();
     }
 
     protected void HideGameClearUI()
     {
-        //
+        UIManager.Instance.HideGameClearUI();
     }
 }
