@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Monster2 : MonoBehaviour
 {
-    public static readonly HashSet<Monster> Entities = new HashSet<Monster>();
     public float baseSpeed = 1;
     public float currentSpeed = 1;
     public int hp;

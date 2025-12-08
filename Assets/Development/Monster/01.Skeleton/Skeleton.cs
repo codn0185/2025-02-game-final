@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Monster : CommonMonsterBase
+public class Skeleton : CommonMonsterBase
 {
 
     protected override void Awake()

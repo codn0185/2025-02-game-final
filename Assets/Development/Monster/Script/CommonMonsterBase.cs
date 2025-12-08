@@ -41,7 +41,7 @@ public abstract class CommonMonsterBase : MonsterController, IStoppable, IKnockb
         moveSpeed = baseMoveSpeed;
     }
 
-    protected new void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
         if (other.CompareTag(Tag.Bullet))
@@ -90,7 +90,7 @@ public abstract class CommonMonsterBase : MonsterController, IStoppable, IKnockb
     {
         if (other.CompareTag(Tag.Bullet))
         {
-            if (IsDead())
+            if (IsDead)
             {
                 return;
             }

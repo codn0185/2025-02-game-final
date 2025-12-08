@@ -54,9 +54,12 @@ public class BackgroundManager : Singleton<BackgroundManager>
     {
         offset += Time.deltaTime * 0.1f;
         if (offset > 1f) offset -= 1f;
-        LeftWall.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, -offset);
-        RightWall.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, -offset);
-        Floor.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, -offset);
+        if (LeftWall != null)
+            LeftWall.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, -offset);
+        if (RightWall != null)
+            RightWall.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, -offset);
+        if (Floor != null)
+            Floor.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, -offset);
     }
 
     private void ScrollBackgrounds()
@@ -69,7 +72,6 @@ public class BackgroundManager : Singleton<BackgroundManager>
 
     private void SpawnBackground(GameObject backgroundPrefab)
     {
-        // Debug.Log("Spawning Background: " + backgroundPrefab.name);
         GameObject bg = Instantiate(backgroundPrefab, SpawnPosition, Quaternion.identity);
         SpawnedBackgroundGameObjects.Add(bg);
     }
@@ -93,7 +95,6 @@ public class BackgroundManager : Singleton<BackgroundManager>
                 Destroy(bg);
                 SpawnedBackgroundGameObjects.RemoveAt(i);
                 i--;
-                // Debug.Log("Background Removed");
             }
         }
     }
@@ -102,7 +103,6 @@ public class BackgroundManager : Singleton<BackgroundManager>
     {
         while (true)
         {
-            Debug.Log("Spawning Background");
             SpawnRandomBackgroundForStage(CurrentStage);
             yield return new WaitForSeconds(SpawnSpeed);
         }
@@ -112,7 +112,6 @@ public class BackgroundManager : Singleton<BackgroundManager>
     {
         if (spawnCoroutine != null) return;
         spawnCoroutine = StartCoroutine(SpawnBackgroundRoutine());
-        Debug.Log("Background Spawning Started");
     }
 
     public void StopSpawningBackgrounds()
@@ -120,7 +119,6 @@ public class BackgroundManager : Singleton<BackgroundManager>
         if (spawnCoroutine == null) return;
         StopCoroutine(spawnCoroutine);
         spawnCoroutine = null;
-        Debug.Log("Background Spawning Stopped");
     }
 
     public void ClearAllBackgrounds()
@@ -131,6 +129,5 @@ public class BackgroundManager : Singleton<BackgroundManager>
         }
         SpawnedBackgroundGameObjects.Clear();
         StopSpawningBackgrounds();
-        Debug.Log("All Backgrounds Cleared");
     }
 }
