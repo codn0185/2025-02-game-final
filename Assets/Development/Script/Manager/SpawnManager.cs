@@ -3,28 +3,27 @@ using UnityEngine;
 
 public class SpawnManager : Singleton<SpawnManager>
 {
-    [SerializeField] public StageSettingSO stageSettings;
-    private static StageSettingSO Settings => Instance.stageSettings;
-    private int[] enemyRatio = { 40, 30, 30 };
+    private static StageSettingSO stageSettings;
+    private int[][] enemyRatio;
     private int totalEnemies = 50;
-    int[] spawnedEnemies;
+    int[] spawnedEnemyRatio;
     int enemyCount = 0;
     private GameObject[] monsterPrefabs;
+    private GameObject bossPrefab;
     public GameObject[] itemPrefabs;
     public GameObject spawnPortal;
+    public float spawnRate = 0.2f;
+    private int currentStage => GameProgressManager.Instance.CurrentStage;
+    private int currentRound => GameProgressManager.Instance.CurrentRound;
 
     protected override void Awake()
     {
         base.Awake();
         if (stageSettings == null)
         {
-            stageSettings = Resources.Load<StageSettingSO>("Stage1Settings");
+            stageSettings = Resources.Load<StageSettingSO>("StageSettings" + currentStage);
         }
-        monsterPrefabs = Settings.enemies;
-        enemyRatio = Settings.enemyRatio1;
-        totalEnemies = Settings.totalEnemies[0];
-
-        spawnedEnemies = new int[monsterPrefabs.Length];
+        SetStage(stageSettings);
 
         StartCoroutine(Spawn_Monster_Coroutine());
         // StartCoroutine(Spawn_Item_Coroutine());
@@ -36,44 +35,28 @@ public class SpawnManager : Singleton<SpawnManager>
     }
     IEnumerator Spawn_Monster_Coroutine()
     {
-        // while (true)
-        // {
-        //     if (GameManager.Instance.CurrentState != GameState.GAME_PLAY)
-        //     {
-        //         continue;
-        //     }
-
-        //     Round.RoundData rd = GameManager.Instance.CurrentRoundData;
-        //     if (rd != null && rd.round >= 1)
-        //     {
-        //         float xPos = Random.Range(-4.0f, 4.0f);
-        //         float zPos = Random.Range(33.5f, 55.5f);
-        //         Instantiate(monsterPrefab, new Vector3(xPos, 0.32f, zPos), Quaternion.Euler(0, 180, 0));
-
-        //         float wait = Mathf.Max(0.01f, Random.Range(1f, 1.5f) / rd.mob_spawn_rate);
-        //         yield return new WaitForSeconds(wait);
-        //     }
-        //     else
-        //     {
-        //         yield return new WaitForSeconds(1f);
-        //     }
-        // }
 
         if (GameManager.instance != null && GameManager.instance.CurrentState == GameState.GAME_PLAY && totalEnemies > enemyCount)
         {
+
             if (!spawnPortal.activeSelf)
                 spawnPortal.SetActive(true);
 
-            Round.RoundData rd = GameManager.instance.CurrentRoundData;
+
             float xPos = Random.Range(-4.0f, 4.0f);
             // float zPos = Random.Range(33.5f, 55.5f);
             Vector3 spawnPosition = new Vector3(xPos, 0.32f, 50f);
+            if (currentRound == 2 && enemyCount < 1)
+            {
+                Instantiate(bossPrefab, spawnPosition, Quaternion.Euler(0, 180, 0));
+
+            }
             if (enemyCount % 10 > 3)
             {
 
                 for (int i = 0; i < monsterPrefabs.Length; i++)
                 {
-                    if (enemyRatio[i] > spawnedEnemies[i] / enemyCount * 100)
+                    if (enemyRatio[currentRound][i] > spawnedEnemyRatio[i] / enemyCount * 100)
                     {
                         Instantiate(monsterPrefabs[i], spawnPosition, Quaternion.Euler(0, 180, 0));
                         break;
@@ -85,7 +68,7 @@ public class SpawnManager : Singleton<SpawnManager>
                 Instantiate(monsterPrefabs[Random.Range(0, monsterPrefabs.Length)], spawnPosition, Quaternion.Euler(0, 180, 0));
 
             enemyCount++;
-            float wait = Mathf.Max(0.01f, Random.Range(1f, 1.5f) / rd.mob_spawn_rate);
+            float wait = Random.Range(4f, 5f) / spawnRate;
             yield return new WaitForSeconds(wait);
         }
         else
@@ -109,5 +92,16 @@ public class SpawnManager : Singleton<SpawnManager>
             yield return new WaitForSeconds(1f);
         }
         StartCoroutine(Spawn_Item_Coroutine());
+    }
+
+    public void SetStage(StageSettingSO settings)
+    {
+        monsterPrefabs = settings.enemies;
+        bossPrefab = settings.boss;
+        enemyRatio = new int[][] { settings.enemyRatio1, settings.enemyRatio2, settings.enemyRatio3 };
+        totalEnemies = settings.totalEnemies[currentRound];
+        spawnRate = settings.spawnRatios[currentRound];
+
+        spawnedEnemyRatio = new int[monsterPrefabs.Length];
     }
 }

@@ -120,13 +120,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStateType: 0
   ForceStateChange: 0
-  maxHealth: 0
+  maxHealth: 50
   currentHealth: 0
+  baseMoveSpeed: 10
   moveSpeed: 0
-  attackDamage: 0
-  attackSpeed: 0
-  experiencePoints: 0
+  attackDamage: 30
+  attackSpeed: 5
+  experiencePoints: 50
   healthBar: {fileID: 4084465031825434974}
+  hitAudio: {fileID: 0}
 --- !u!95 &26509998367134668
 Animator:
   serializedVersion: 7
@@ -170,28 +172,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
-<<<<<<< HEAD
---- !u!114 &4361268697228956560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734889237951171335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0170cef2045aecd4b83886a8ab540117, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 50
-  baseMoveSpeed: 10
-  attackDamage: 5
-  attackSpeed: 3
-  experiencePoints: 20
-  healthBar: {fileID: 4084465031825434974}
-  hitAudio: {fileID: 0}
-=======
->>>>>>> origin/main
 --- !u!54 &5626095740767675445
 Rigidbody:
   m_ObjectHideFlags: 0

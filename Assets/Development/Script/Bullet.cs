@@ -9,8 +9,7 @@ public class Bullet : MonoBehaviour
     //Explosion
     public bool isExplosive = false;
     public float explosionSize = 3f;
-    private Vector3 explosionVector;
-
+    public Vector3 explosionVector;
     public float lingerDuration = 0f;
     // Knockback
     public bool isKnockback = false;

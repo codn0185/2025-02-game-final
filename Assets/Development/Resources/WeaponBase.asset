@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b496d77b7929de058aeab6e0b93b099, type: 3}
-  m_Name: Stage3Settings
+  m_Script: {fileID: 11500000, guid: c4516d7b0f800f01eb6b4edeeae99fad, type: 3}
+  m_Name: WeaponBase
   m_EditorClassIdentifier: 
-  enemies: []
-  totalEnemies: 320000004600000064000000
-  enemyRatio1: 640000000000000000000000
-  enemyRatio2: 3c0000001e0000000a000000
-  enemyRatio3: 280000002800000014000000
+  Earth: {fileID: 11400000, guid: d276f562cd5607b09a42f0b32b046d5e, type: 2}
+  Ice: {fileID: 11400000, guid: 47062012e51586883af5c613409fba60, type: 2}
+  Fire: {fileID: 0}
+  Lightning: {fileID: 0}

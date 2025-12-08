@@ -230,6 +230,8 @@ Then, it should be good to go!
 
 ### UI Menu
 
+* [UI asset](https://assetstore.unity.com/packages/2d/gui/pixel-art-ui-essentials-329983#content)
+
 * BGM
   + Main Menu
   + Pause Menu

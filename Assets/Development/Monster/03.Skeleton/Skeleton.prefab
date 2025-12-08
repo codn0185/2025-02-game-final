@@ -425,24 +425,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d638efcb74dd41bbb219556cd65185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  maxHealth: 20
-  baseMoveSpeed: 10
-  attackDamage: 2
-  attackSpeed: 1
-  experiencePoints: 1
-  healthBar: {fileID: 8713000739228160706}
-  hitAudio: {fileID: 8300000, guid: 9644632a7ebd9710da79dd5a2c8ad3e6, type: 3}
-=======
   currentStateType: 0
   ForceStateChange: 0
-  maxHealth: 0
-  currentHealth: 0
-  moveSpeed: 0
+  maxHealth: 30
+  currentHealth: 1
+  baseMoveSpeed: 15
+  moveSpeed: 10
   attackDamage: 0
   attackSpeed: 0
   experiencePoints: 0
   healthBar: {fileID: 8713000739228160706}
+  hitAudio: {fileID: 8300000, guid: 9644632a7ebd9710da79dd5a2c8ad3e6, type: 3}
 --- !u!95 &7458259793570958920
 Animator:
   serializedVersion: 7
@@ -465,7 +458,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
->>>>>>> origin/main
 --- !u!136 &1187692734500030006
 CapsuleCollider:
   m_ObjectHideFlags: 0

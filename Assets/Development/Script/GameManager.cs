@@ -27,12 +27,12 @@ public class GameManager : MonoBehaviour
 
 
     // 공격 관련
-    public const int MAX_BULLET_DAMAGE = 100;
-    public const int MAX_BULLET_COUNT = 15;
-    public const float MIN_ATTACK_SPEED = 0.05f;
+    // public const int MAX_BULLET_DAMAGE = 100;
+    // public const int MAX_BULLET_COUNT = 15;
+    // public const float MIN_ATTACK_SPEED = 0.05f;
     // How many times player attacks per 5 seconds
-    public int attack_speed = 5;
-    public int attack_type;
+    // public int attack_speed = 5;
+    // public int attack_type;
     // public int bullet_damage;
     // public int bullet_count;
     // public int bullet_hit_count = 1;
