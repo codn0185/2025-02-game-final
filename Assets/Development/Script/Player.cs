@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public float speed;
     public float attack_speed;
     public MagicType magicType;
-    private Weapon weapon;
+    private WeaponStats weapon;
     // Spell effects
     public GameObject[] bulletPrefabs;
     private static WeaponBaseSettingSO weaponBaseSettings;
