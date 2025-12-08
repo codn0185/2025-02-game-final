@@ -12,7 +12,6 @@ public class SpawnManager : Singleton<SpawnManager>
     public GameObject[] itemPrefabs;
     public GameObject spawnPortal;
     public float spawnRate = 0.2f;
-    private int currentStage => GameProgressManager.Instance.CurrentStage;
     private int currentRound => GameProgressManager.Instance.CurrentRound;
 
     private int roundSpawnCount = 0; // 현재 라운드에서 소환된 적 수
@@ -41,9 +40,8 @@ public class SpawnManager : Singleton<SpawnManager>
     IEnumerator Spawn_Monster_Coroutine()
     {
 
-        if (stageSettings != null &&GameManager.instance != null && GameManager.instance.CurrentState == GameState.GAME_PLAY && totalEnemies > roundSpawnCount)
+        if (stageSettings != null && GameManager.instance != null && GameManager.instance.CurrentState == GameState.GAME_PLAY && totalEnemies > roundSpawnCount)
         {
-
             if (!spawnPortal.activeSelf)
                 spawnPortal.SetActive(true);
 
@@ -79,7 +77,7 @@ public class SpawnManager : Singleton<SpawnManager>
         else
         {
             spawnPortal.SetActive(false);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1);
         }
         StartCoroutine(Spawn_Monster_Coroutine());
     }
@@ -111,20 +109,19 @@ public class SpawnManager : Singleton<SpawnManager>
 
     //     spawnedEnemyRatio = new int[monsterPrefabs.Length];
     // }
-    
+
     public void SetStage(int stageNumber)
     {
         stageSettings = Resources.Load<StageSettingSO>(StageSettings.GetStageFromNumber(stageNumber));
+        monsterPrefabs = stageSettings.enemies;
+        bossPrefab = stageSettings.boss;
     }
 
     public void SetRound(int round)
     {
-        monsterPrefabs = stageSettings.enemies;
-        bossPrefab = stageSettings.boss;
         enemyRatio = new int[][] { stageSettings.enemyRatio1, stageSettings.enemyRatio2, stageSettings.enemyRatio3 };
         totalEnemies = stageSettings.totalEnemies[round - 1];
         spawnRate = stageSettings.spawnRatios[round - 1];
-
         spawnedEnemyRatio = new int[monsterPrefabs.Length];
 
         roundSpawnCount = 0;
@@ -139,7 +136,7 @@ public class SpawnManager : Singleton<SpawnManager>
     public void AddRoundKillCount(int count)
     {
         roundKillCount += count;
-        if (roundKillCount >= totalEnemies)
+        if (currentRound != 3 && roundKillCount >= totalEnemies)
         {
             GameProgressManager.Instance.CompleteRound();
         }

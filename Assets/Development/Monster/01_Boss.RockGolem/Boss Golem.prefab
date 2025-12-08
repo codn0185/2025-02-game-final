@@ -116,9 +116,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStateType: 0
   ForceStateChange: 0
-  maxHealth: 1500
+  maxHealth: 30
   currentHealth: 0
-  baseMoveSpeed: 5
+  baseMoveSpeed: 1
   moveSpeed: 0
   attackDamage: 0
   attackSpeed: 0
