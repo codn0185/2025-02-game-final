@@ -33,11 +33,13 @@ public class GameProgressManager : Singleton<GameProgressManager>
     protected override void Awake()
     {
         base.Awake();
+        
+        ChangeState(GameProgressState.Idle);
     }
 
     void Start()
     {
-        ChangeState(GameProgressState.Playing);
+        StartStage(1);
     }
 
     // ========== 플레이어 정보 관리 ==========
@@ -59,10 +61,11 @@ public class GameProgressManager : Singleton<GameProgressManager>
     // ========== 스테이지 관리 ==========
     public void StartStage(int stage)
     {
-        currentStage = stage;
-        currentRound = 0;
         ChangeState(GameProgressState.Playing);
-        SpawnManager.Instance.SetStage(currentStage, currentRound);
+        currentStage = stage;
+        SpawnManager.Instance.SetStage(currentStage);
+        currentRound = 0;
+        NextRound();
     }
 
     public void CompleteStage()
@@ -82,13 +85,15 @@ public class GameProgressManager : Singleton<GameProgressManager>
     // ========== 라운드 관리 ==========
     public void StartRound(int round)
     {
-        currentRound = round;
         ChangeState(GameProgressState.Playing);
+        currentRound = round;
+        SpawnManager.Instance.SetRound(currentRound);
     }
 
     public void CompleteRound()
     {
         SaveProgress();
+        NextRound();
     }
 
     public void NextRound()
@@ -136,7 +141,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
                 break;
             case GameProgressState.Playing:
                 Time.timeScale = 1f;
-                BackgroundManager.Instance.StartSpawningBackgrounds();
+                // BackgroundManager.Instance.StartSpawningBackgrounds();
                 break;
             case GameProgressState.Paused:
                 Time.timeScale = 0f;
@@ -147,7 +152,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
                 SaveMaxProgressToProfile();  // 프로필에 최고 기록 저장
                 ShowGameOverUI(); // 게임 오버 UI 표시
                 ResetProgress(); // 진행 상황 초기화
-                BackgroundManager.Instance.StopSpawningBackgrounds(); // 배경 소환 중지
+                // BackgroundManager.Instance.StopSpawningBackgrounds(); // 배경 소환 중지
 
                 break;
             case GameProgressState.GameClear:
@@ -155,7 +160,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
                 SaveMaxProgressToProfile();  // 프로필에 최고 기록 저장
                 ShowGameClearUI(); // 게임 클리어 UI 표시
                 ResetProgress(); // 진행 상황 초기화
-                BackgroundManager.Instance.StopSpawningBackgrounds(); // 배경 소환 중지
+                // BackgroundManager.Instance.StopSpawningBackgrounds(); // 배경 소환 중지
 
                 break;
         }
