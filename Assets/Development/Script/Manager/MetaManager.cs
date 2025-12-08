@@ -89,12 +89,19 @@ public class MetaManager : Singleton<MetaManager>
     {
         CurrentGold = gold;
         CurrentGem = gem;
+        UpdateResourcesUI();
     }
 
     public void AddResources(int gold, int gem)
     {
         CurrentGold += gold;
         CurrentGem += gem;
+        UpdateResourcesUI();
+    }
+
+    public void UpdateResourcesUI()
+    {
+        UIManager.Instance.UpdateMainMenuResources();
     }
 
     public bool TryUpgrade(MetaUpgradeType type)
