@@ -12,8 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b496d77b7929de058aeab6e0b93b099, type: 3}
   m_Name: StageSettings3
   m_EditorClassIdentifier: 
-  enemies: []
-  totalEnemies: 320000004600000064000000
+  enemies:
+  - {fileID: 1945533208979129777, guid: 5cab26e4d9d4de786a84cf9032a920b7, type: 3}
+  - {fileID: 2219292830553907877, guid: 179fccfffd4bed44c834c4d565f97b6d, type: 3}
+  - {fileID: 4530003306004163418, guid: 4a8eeb4f0d4a749458c031c1d1eec62e, type: 3}
+  boss: {fileID: 139696, guid: 670088437fbef24419781a39f02932d5, type: 3}
+  totalEnemies: 0a0000000a0000000a000000
+  spawnRatios:
+  - 3
+  - 4
+  - 1
   enemyRatio1: 640000000000000000000000
   enemyRatio2: 3c0000001e0000000a000000
   enemyRatio3: 280000002800000014000000

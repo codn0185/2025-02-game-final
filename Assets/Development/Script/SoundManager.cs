@@ -9,7 +9,8 @@ public class SoundManager : MonoBehaviour
     {
         Shoot = 0,
         Hit = 1,
-        Get = 2
+        Get = 2,
+        BGM = 3
     };
     public static SoundManager instance;
     AudioSource source;
@@ -43,5 +44,9 @@ public class SoundManager : MonoBehaviour
     public void PlayAudio(AudioClip clip)
     {
         source.PlayOneShot(clip);
+    }
+    public void LoopMusic(AudioValue value)
+    {
+        source.Play();
     }
 }

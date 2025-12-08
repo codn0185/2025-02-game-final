@@ -9,7 +9,8 @@ public enum GameState
     GAME_PLAY,
     GAME_PAUSE,
     GAME_OVER,
-    GAME_CLEAR
+    GAME_CLEAR,
+    START_MENU
 }
 
 public class GameManager : MonoBehaviour
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameState CurrentState { get; private set; }
     private const float STATE_CHANGE_DELAY = 0.2f;
 
+    public GameObject startMenuUI;
     public GameObject mainMenuUI;
     public GameObject inGameUI;
     public GameObject gamePauseUI;
@@ -42,7 +44,6 @@ public class GameManager : MonoBehaviour
     int max_player_hp = 10;
     int player_hp = 0;
     int kill_count = 0;
-    public Round.RoundData CurrentRoundData { get; private set; }
     int game_round = 0;
     float round_time = 0f;
 
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
 
-        ChangeState(GameState.MAIN_MENU); ;
+        ChangeState(GameState.START_MENU); ;
     }
 
     void Update()
@@ -100,11 +101,15 @@ public class GameManager : MonoBehaviour
         HideAllMenu();
         switch (CurrentState)
         {
+            case GameState.START_MENU:
+                Time.timeScale = 0f;
+                startMenuUI.SetActive(true);
+                break;
+
             case GameState.MAIN_MENU:
                 Debug.Log("GameState.MAIN_MENU");
                 Time.timeScale = 0f;
                 mainMenuUI.SetActive(true);
-
                 FillUpHP();
                 break;
             case GameState.GAME_PLAY:
@@ -139,12 +144,18 @@ public class GameManager : MonoBehaviour
         gamePauseUI.SetActive(false);
         gameOverUI.SetActive(false);
         gameClearUI.SetActive(false);
+        startMenuUI.SetActive(false);
     }
 
+
+    public void ChangeToStartMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    }
     public void ChangeToMainMenu()
     {
-        // ChangeState(GameState.MAIN_MENU);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ChangeState(GameState.MAIN_MENU);
     }
 
     public void ChangeToPlaying()
@@ -180,7 +191,7 @@ public class GameManager : MonoBehaviour
         }
 
         FillUpHP();
-        CurrentRoundData = Round.data[game_round];
+        // CurrentRoundData = Round.data[game_round];
         // UIManager.instance.UpdateRoundText(game_round, Round.MAX_ROUND);
     }
 

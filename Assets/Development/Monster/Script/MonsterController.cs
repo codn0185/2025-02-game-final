@@ -232,6 +232,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
         healthBar.gameObject.SetActive(false);
         Animator.SetBool(MonsterAnimatorParameter.Dead, true);
         SoundManager.instance.PlayAudio(hitAudio);
+        SpawnManager.Instance.AddRoundKillCount();
         GameProgressManager.Instance.AddExperience(experiencePoints);
         GameProgressManager.Instance.AddCoins(dropCoins);
         GameProgressManager.Instance.AddGems(dropGems);
@@ -262,7 +263,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
     {
         while (true)
         {
-            yield return new WaitForSeconds(attackSpeed);
+            yield return new WaitForSeconds(5f / attackSpeed);
             Attack();
         }
     }

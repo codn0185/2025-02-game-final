@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
     public GameObject hitParticle;
     public float hitParticleLinger = 0.5f;
     public CapsuleCollider hitCollider;
-    public GameObject slowParticle;
+    public ParticleSystem slowParticle;
     public AudioClip shootSFX;
     public AudioClip hitSFX;
 
@@ -53,7 +53,7 @@ public class Bullet : MonoBehaviour
 
     }
 
-    public void Initialize(Weapon weapon)
+    public void Initialize(WeaponStats weapon)
     {
         damage = weapon.damage;
         speed = weapon.projectileSpeed;
