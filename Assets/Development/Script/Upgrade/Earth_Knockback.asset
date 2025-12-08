@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edaf5b1faadb27442a56deafc708e992, type: 3}
-  m_Name: BaseAttackDamage
+  m_Name: Earth_Knockback
   m_EditorClassIdentifier: 
-  Type: 1
-  Name: Damage Upgrade
-  Description: Increase Base Damage
+  MagicType: 0
+  UpgradeType: 1
+  Name: Earth_Knockback
+  Description: (Earth) Knockback Power Upgrade
   Icon: {fileID: 0}
   MaxLevel: 5
-  IncreaseRatio: 0.1
-  CostPerLevel: 9001000020030000b004000040060000d0070000
+  IncreaseRatio: 20
+  CostPerLevel: 

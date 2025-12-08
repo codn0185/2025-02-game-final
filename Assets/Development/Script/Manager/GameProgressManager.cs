@@ -222,6 +222,7 @@ public class GameProgressManager : Singleton<GameProgressManager>
         {
             case GameProgressState.Idle:
                 Time.timeScale = 1f;
+                MetaManager.Instance.AddResources(playerCoins, playerGems); // 메타 매니저에 자원 추가
                 break;
             case GameProgressState.Playing:
                 Time.timeScale = 1f;

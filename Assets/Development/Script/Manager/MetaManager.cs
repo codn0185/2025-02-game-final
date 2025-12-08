@@ -10,10 +10,21 @@ using UnityEngine;
 
 public enum MetaUpgradeType
 {
-    BaseHealth,
-    BaseAttackPower,
-    BaseAttackSpeed,
-    BaseHeal,
+    // Earth Magic Upgrades
+    Earth_AttackSpeed,
+    Earth_Knockback,
+    
+    // Ice Magic Upgrades
+    Ice_AttackSpeed,
+    Ice_SlowIntensity,
+    
+    // Fire Magic Upgrades
+    Fire_AttackPower,
+    Fire_ExplosionRadius,
+    
+    // Lightning Magic Upgrades
+    Lightning_AttackPower,
+    Lightning_ChainCount,
 }
 
 public class MetaManager : Singleton<MetaManager>
@@ -25,6 +36,22 @@ public class MetaManager : Singleton<MetaManager>
 
     public int CurrentGold { get; private set; } = 0;
     public int CurrentGem {get; private set; } = 0;
+
+    // ========== 업그레이드 적용 메서드 ==========
+    
+    /// <summary>
+    /// 업그레이드 증가 배율 반환 (1 + 레벨 * 증가비율)
+    /// 예: 레벨 3, 증가비율 0.08 → 1 + 0.08*3 = 1.24
+    /// 사용법: stat *= GetUpgradeMultiplier(type)
+    /// </summary>
+    public float GetUpgradeMultiplier(MetaUpgradeType type)
+    {
+        if (!upgradeSODict.TryGetValue(type, out MetaUpgradeSO so))
+            return 1f;
+        
+        int level = GetUpgradeLevel(type);
+        return 1f + (so.IncreaseRatio * level);
+    }
 
     protected override void Awake()
     {
@@ -40,12 +67,12 @@ public class MetaManager : Singleton<MetaManager>
         foreach (var so in MetaUpgrades)
         {
             if (so != null)
-                upgradeSODict[so.Type] = so;
+                upgradeSODict[so.UpgradeType] = so;
         }
 
         foreach (var so in MetaUpgrades)
         {
-            MetaUpgradeLevels[so.Type] = 0;
+            MetaUpgradeLevels[so.UpgradeType] = 0;
         }
     }
 
@@ -54,7 +81,7 @@ public class MetaManager : Singleton<MetaManager>
         if (data == null) return;
         foreach (var so in MetaUpgrades)
         {
-            MetaUpgradeLevels[so.Type] = data.GetUpgradeLevel(so.Type);
+            MetaUpgradeLevels[so.UpgradeType] = data.GetUpgradeLevel(so.UpgradeType);
         }
     }
 
