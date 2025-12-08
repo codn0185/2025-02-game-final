@@ -5,9 +5,8 @@ public class SpawnManager : Singleton<SpawnManager>
 {
     private static StageSettingSO stageSettings;
     private int[][] enemyRatio;
-    private int totalEnemies = 50;
+    private int totalEnemies;
     int[] spawnedEnemyRatio;
-    int enemyCount = 0;
     private GameObject[] monsterPrefabs;
     private GameObject bossPrefab;
     public GameObject[] itemPrefabs;
@@ -16,10 +15,13 @@ public class SpawnManager : Singleton<SpawnManager>
     private int currentStage => GameProgressManager.Instance.CurrentStage;
     private int currentRound => GameProgressManager.Instance.CurrentRound;
 
+    private int enemyCount = 0; // 현재 라운드에서 소환된 적 수
+    private int roundTotalKillCount = 0; // 현재 라운드에서 처치한 적 수
+
     protected override void Awake()
     {
         base.Awake();
-        SetStage(1, 1);
+        // SetStage(1, 1);
         StartCoroutine(Spawn_Monster_Coroutine());
         // StartCoroutine(Spawn_Item_Coroutine());
     }
@@ -89,10 +91,26 @@ public class SpawnManager : Singleton<SpawnManager>
         StartCoroutine(Spawn_Item_Coroutine());
     }
 
-    public void SetStage(int stage, int round)
-    {
-        stageSettings = Resources.Load<StageSettingSO>("StageSettings" + stage);
+    // public void SetStage(int stage, int round)
+    // {
+    //     stageSettings = Resources.Load<StageSettingSO>("StageSettings" + stage);
 
+    //     monsterPrefabs = stageSettings.enemies;
+    //     bossPrefab = stageSettings.boss;
+    //     enemyRatio = new int[][] { stageSettings.enemyRatio1, stageSettings.enemyRatio2, stageSettings.enemyRatio3 };
+    //     totalEnemies = stageSettings.totalEnemies[round - 1];
+    //     spawnRate = stageSettings.spawnRatios[round - 1];
+
+    //     spawnedEnemyRatio = new int[monsterPrefabs.Length];
+    // }
+    
+    public void SetStage(int stageNumber)
+    {
+        stageSettings = Resources.Load<StageSettingSO>(StageSettings.GetStageFromNumber(stageNumber));
+    }
+
+    public void SetRound(int round)
+    {
         monsterPrefabs = stageSettings.enemies;
         bossPrefab = stageSettings.boss;
         enemyRatio = new int[][] { stageSettings.enemyRatio1, stageSettings.enemyRatio2, stageSettings.enemyRatio3 };
@@ -100,11 +118,17 @@ public class SpawnManager : Singleton<SpawnManager>
         spawnRate = stageSettings.spawnRatios[round - 1];
 
         spawnedEnemyRatio = new int[monsterPrefabs.Length];
+
+        enemyCount = 0;
+        roundTotalKillCount = 0;
     }
-    
-    public void SetStage(int stageNumber)
+
+    public void AddRoundKillCount()
     {
-        StageSettingSO settings = Resources.Load<StageSettingSO>(StageSettings.GetStageFromNumber(stageNumber));
-        SetStage(settings);
+        roundTotalKillCount++;
+        if (roundTotalKillCount >= totalEnemies)
+        {
+            GameProgressManager.Instance.CompleteRound();
+        }
     }
 }
