@@ -21,6 +21,10 @@ public class SpawnManager : Singleton<SpawnManager>
     protected override void Awake()
     {
         base.Awake();
+    }
+
+    void Start()
+    {
         // SetStage(1, 1);
         StartCoroutine(Spawn_Monster_Coroutine());
         // StartCoroutine(Spawn_Item_Coroutine());
@@ -33,7 +37,7 @@ public class SpawnManager : Singleton<SpawnManager>
     IEnumerator Spawn_Monster_Coroutine()
     {
 
-        if (GameManager.instance != null && GameManager.instance.CurrentState == GameState.GAME_PLAY && totalEnemies > enemyCount)
+        if (stageSettings != null &&GameManager.instance != null && GameManager.instance.CurrentState == GameState.GAME_PLAY && totalEnemies > enemyCount)
         {
 
             if (!spawnPortal.activeSelf)
