@@ -16,7 +16,7 @@ MonoBehaviour:
   projectileSpeed: 25
   attack_speed: 15
   life_time: 10
-  damage: 15
+  damage: 2
   isKnockback: 0
   knockbackPower: 1
   isSlow: 1
