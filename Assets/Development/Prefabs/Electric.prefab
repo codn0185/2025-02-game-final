@@ -156,12 +156,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7225c8540aa33f1479963c83706ad8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
   life_time: 10
   damage: 3
-  hit_count: 1
   isExplosive: 0
   explosionSize: 3
+  explosionVector: {x: 0, y: 0, z: 0}
   lingerDuration: 0.1
   isKnockback: 0
   knockbackPower: 1
@@ -172,9 +171,11 @@ MonoBehaviour:
   chainSize: 7
   chainCount: 3
   hitParticle: {fileID: 1141330259687333427, guid: 9ab79ef539caecf0c9b226ed7890e662, type: 3}
+  hitParticleLinger: 0.5
   hitCollider: {fileID: 0}
   slowParticle: {fileID: 0}
-  shootSFX: {fileID: 8300000, guid: f1cb5d83282f2904a85f73111d068616, type: 3}
+  shootSFX: {fileID: 8300000, guid: 0e4d28d2354ab6f0689f31336c4c2bc7, type: 3}
+  hitSFX: {fileID: 8300000, guid: 46a3ca74ef747b5178552c9bdc22cb35, type: 3}
 --- !u!96 &9144028643377933717
 TrailRenderer:
   serializedVersion: 3

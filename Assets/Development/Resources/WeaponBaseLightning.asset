@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: WeaponBaseEarth
+  m_Name: WeaponBaseLightning
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  projectileSpeed: 20
-  attack_speed: 20
+  projectileSpeed: 15
+  attack_speed: 15
   life_time: 10
-  damage: 10
-  isKnockback: 1
+  damage: 0
+  isKnockback: 0
   knockbackPower: 1
   isSlow: 0
   slowPower: 1
@@ -24,6 +24,6 @@ MonoBehaviour:
   isExplosive: 0
   explosionSize: 3
   lingerDuration: 0
-  isChain: 0
-  chainSize: 3
+  isChain: 1
+  chainSize: 5
   chainCount: 3

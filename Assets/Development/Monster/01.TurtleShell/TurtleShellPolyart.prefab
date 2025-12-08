@@ -128,7 +128,7 @@ MonoBehaviour:
   attackSpeed: 5
   experiencePoints: 50
   healthBar: {fileID: 4084465031825434974}
-  hitAudio: {fileID: 0}
+  hitAudio: {fileID: 8300000, guid: 200dff54cc30a964cb0903e0ee9aea36, type: 3}
 --- !u!95 &26509998367134668
 Animator:
   serializedVersion: 7

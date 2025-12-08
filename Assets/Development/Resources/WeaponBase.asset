@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4516d7b0f800f01eb6b4edeeae99fad, type: 3}
   m_Name: WeaponBase
   m_EditorClassIdentifier: 
-  Earth: {fileID: 11400000, guid: d276f562cd5607b09a42f0b32b046d5e, type: 2}
-  Ice: {fileID: 11400000, guid: 47062012e51586883af5c613409fba60, type: 2}
-  Fire: {fileID: 0}
-  Lightning: {fileID: 0}
+  weapons:
+  - {fileID: 11400000, guid: d276f562cd5607b09a42f0b32b046d5e, type: 2}
+  - {fileID: 11400000, guid: 47062012e51586883af5c613409fba60, type: 2}
+  - {fileID: 11400000, guid: 268ca8a41e4c63121ae6ebecf8f3fc67, type: 2}
+  - {fileID: 11400000, guid: 614e5dec1f774f24c90be75c2878c55b, type: 2}

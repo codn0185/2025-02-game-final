@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10;
+    private float speed = 10;
     public float life_time = 10;
     public int damage;
-    public int hit_count;
     //Explosion
     public bool isExplosive = false;
     public float explosionSize = 3f;
@@ -44,24 +43,32 @@ public class Bullet : MonoBehaviour
     public void OnHit()
     {
         SoundManager.instance.PlayAudio(hitSFX);
-        hit_count--;
         GameObject hitParticleInstance = Instantiate(hitParticle, transform.position, Quaternion.identity);
         Destroy(hitParticleInstance, hitParticleLinger);
 
         if (isExplosive)
             hitCollider.transform.localScale = explosionVector;
 
-        if (hit_count <= 0)
-            Destroy(gameObject, lingerDuration);
+        Destroy(gameObject, lingerDuration);
 
     }
 
-    public void Initialize(int damage = 1, int hit_count = 1, float speed = 15, float life_time = 10f)
+    public void Initialize(Weapon weapon)
     {
-        this.damage = damage;
-        this.hit_count = hit_count;
-        this.speed = speed;
-        this.life_time = life_time;
+        damage = weapon.damage;
+        speed = weapon.projectileSpeed;
+        life_time = weapon.life_time;
+        isKnockback = weapon.isKnockback;
+        knockbackPower = weapon.knockbackPower;
+        isSlow = weapon.isSlow;
+        slowPower = weapon.slowPower;
+        slowDuration = weapon.slowDuration;
+        isExplosive = weapon.isExplosive;
+        explosionSize = weapon.explosionSize;
+        lingerDuration = weapon.lingerDuration;
+        isChain = weapon.isChain;
+        chainSize = weapon.chainSize;
+        chainCount = weapon.chainCount;
     }
 
 
