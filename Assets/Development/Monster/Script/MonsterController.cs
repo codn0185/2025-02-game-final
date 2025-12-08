@@ -12,30 +12,32 @@ using UnityEngine.UI;
 public abstract class MonsterController : Controller<MonsterFSM>
 {
     // === Constants ===
-    private const float DESTROY_DELAY = 2.0f;
+    private const float DESTROY_DELAY = 5.0f;
 
     // === Static Collections ===
-    /// <summary>
-    /// 현재 활성화된 모든 몬스터 인스턴스
-    /// </summary>
+    // 현재 활성화된 모든 몬스터 인스턴스
     public static readonly HashSet<MonsterController> Entities = new();
 
-    // === Protected Stats (상속 클래스에서 접근 가능) ===
-    protected int maxHealth;
-    protected int currentHealth;
-    protected float moveSpeed;
-    protected int attackDamage;
-    protected float attackSpeed;
-    protected int experiencePoints;
+    // === Serialized Fields ===
+    [Header("Debug Info")]
+    [SerializeField] private MonsterStateType currentStateType;
+    [SerializeField] private bool ForceStateChange = false;
 
+    [Header("Monster Stats")]
+    [SerializeField] protected int maxHealth;
+    [SerializeField] protected int currentHealth;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected int attackDamage;
+    [SerializeField] protected float attackSpeed;
+    [SerializeField] protected int experiencePoints;
+    [Header("UI")]
+    [SerializeField] private Slider healthBar;
     // === Private Fields ===
     private Coroutine attackCoroutine;
 
     // === Public Properties ===
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
-
-    [SerializeField] private Slider healthBar;
 
     public int CurrentHealth => currentHealth;
     public int MaxHealth => maxHealth;
@@ -52,12 +54,11 @@ public abstract class MonsterController : Controller<MonsterFSM>
         Animator = GetComponent<Animator>();
         healthBar.gameObject.SetActive(false);
         Entities.Add(this);
-
     }
 
     protected virtual void Start()
     {
-        StateMachine.Initialize(StateMachine.IdleState);
+        Initialize(StateMachine.IdleState);
     }
 
     protected virtual void Update()
@@ -65,6 +66,18 @@ public abstract class MonsterController : Controller<MonsterFSM>
         StateMachine.Update();
     }
 
+    protected virtual void LateUpdate()
+    {
+        if (ForceStateChange && currentStateType != StateMachine.CurrentState.StateType)
+        {
+            ChangeStateByType(currentStateType);
+            ForceStateChange = false;
+        }
+        else
+        {
+            currentStateType = StateMachine.CurrentState.StateType;
+        }
+    }
 
     // === Trigger Events ===
     protected virtual void OnTriggerEnter(Collider other)
@@ -173,6 +186,7 @@ public abstract class MonsterController : Controller<MonsterFSM>
         GetComponent<Collider>().enabled = false;
         healthBar.gameObject.SetActive(false);
         GameProgressManager.Instance.AddExperience(experiencePoints);
+        Entities.Remove(this);
         Destroy(gameObject, DESTROY_DELAY);
     }
 
@@ -212,6 +226,12 @@ public abstract class MonsterController : Controller<MonsterFSM>
     }
 
     // === Helper Methods ===
+    private void Initialize(MonsterState initialState)
+    {
+        StateMachine.Initialize(initialState);
+        currentStateType = initialState.StateType;
+    }
+
     private void UpdateHealthBar()
     {
         if (healthBar == null)
@@ -219,5 +239,20 @@ public abstract class MonsterController : Controller<MonsterFSM>
 
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
+    }
+
+    // 인스펙터의MonsterStateType을 기반으로 FSM 상태를 변경
+    private void ChangeStateByType(MonsterStateType stateType)
+    {
+        MonsterState targetState = stateType switch
+        {
+            MonsterStateType.Idle => StateMachine.IdleState,
+            MonsterStateType.Move => StateMachine.MoveState,
+            MonsterStateType.Battle => StateMachine.BattleState,
+            MonsterStateType.Dead => StateMachine.DeadState,
+            _ => StateMachine.IdleState
+        };
+
+        StateMachine.ChangeState(targetState);
     }
 }

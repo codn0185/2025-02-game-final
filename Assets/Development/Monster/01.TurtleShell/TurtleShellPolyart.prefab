@@ -77,9 +77,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9168026953460934851}
+  - component: {fileID: 4361268697228956560}
   - component: {fileID: 26509998367134668}
   - component: {fileID: 6794339292641084524}
-  - component: {fileID: 4361268697228956560}
   - component: {fileID: 5626095740767675445}
   m_Layer: 0
   m_Name: TurtleShellPolyart
@@ -106,6 +106,26 @@ Transform:
   - {fileID: 5735462506696604615}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &4361268697228956560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734889237951171335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0170cef2045aecd4b83886a8ab540117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStateType: 0
+  maxHealth: 0
+  currentHealth: 0
+  moveSpeed: 0
+  attackDamage: 0
+  attackSpeed: 0
+  experiencePoints: 0
+  healthBar: {fileID: 4084465031825434974}
 --- !u!95 &26509998367134668
 Animator:
   serializedVersion: 7
@@ -149,19 +169,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &4361268697228956560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734889237951171335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0170cef2045aecd4b83886a8ab540117, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 4084465031825434974}
 --- !u!54 &5626095740767675445
 Rigidbody:
   m_ObjectHideFlags: 0
