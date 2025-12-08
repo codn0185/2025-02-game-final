@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edaf5b1faadb27442a56deafc708e992, type: 3}
-  m_Name: Earth_Knockback
+  m_Name: Ice_AttackSpeed
   m_EditorClassIdentifier: 
-  MagicType: 0
-  UpgradeType: 1
-  Name: Earth_Knockback
-  Description: (Earth) Knockback Power Upgrade
+  MagicType: 1
+  UpgradeType: 2
+  Name: Ice_AttackSpeed
+  Description: (Ice) Attack Speed Upgrade
   Icon: {fileID: 0}
-  MaxLevel: 5
-  IncreaseRatio: 20
-  CostPerLevel: 0000000000000000000000000000000000000000
+  MaxLevel: 10
+  IncreaseRatio: 10
+  CostPerLevel: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
