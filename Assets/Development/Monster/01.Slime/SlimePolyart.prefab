@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 2824980148479884264}
   - component: {fileID: 6039609623836652172}
   m_Layer: 0
-  m_Name: Slider
+  m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,6 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStateType: 0
+  ForceStateChange: 0
   maxHealth: 0
   currentHealth: 0
   moveSpeed: 0
