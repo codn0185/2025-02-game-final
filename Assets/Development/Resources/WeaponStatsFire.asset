@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: WeaponStatsFire
   m_EditorClassIdentifier: 
   magicType: 2
-  projectileSpeed: 15
+  projectileSpeed: 10
   attack_speed: 5
   life_time: 10
-  damage: 40
+  damage: 5
   isKnockback: 0
   knockbackPower: 1
   isSlow: 0
   slowPower: 1
   slowDuration: 1
   isExplosive: 1
-  explosionSize: 5
+  explosionSize: 3
   lingerDuration: 0.1
   isChain: 0
   chainSize: 3

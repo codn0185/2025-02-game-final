@@ -18,5 +18,5 @@ MonoBehaviour:
   Description: (Fire) Attack Power Upgrade
   Icon: {fileID: 0}
   MaxLevel: 10
-  IncreaseRatio: 10
+  IncreaseRatio: 0.5
   CostPerLevel: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
