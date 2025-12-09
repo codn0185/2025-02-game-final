@@ -116,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStateType: 0
   ForceStateChange: 0
-  maxHealth: 30
+  maxHealth: 50
   currentHealth: 0
   baseMoveSpeed: 0
   moveSpeed: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   dropCoins: 0
   dropGems: 0
   healthBar: {fileID: 6554840995310610955}
-  hitAudio: {fileID: 0}
+  hitAudio: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
 --- !u!95 &388476415
 Animator:
   serializedVersion: 7

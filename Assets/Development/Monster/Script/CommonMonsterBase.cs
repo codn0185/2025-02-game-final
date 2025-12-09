@@ -36,7 +36,7 @@ public abstract class CommonMonsterBase : MonsterController, IStoppable, IKnockb
 
     public IEnumerator SlowCoroutine(float slowPower, float duration)
     {
-        moveSpeed = baseMoveSpeed * (0.3f + (1 / (2 + slowPower)));
+        moveSpeed = baseMoveSpeed * (0.5f + (1 / (3 + slowPower)));
         yield return new WaitForSeconds(duration);
         moveSpeed = baseMoveSpeed;
     }
